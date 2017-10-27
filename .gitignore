@@ -1,4 +1,4 @@
-/hack
+/atcoder/hack
 *.class
 *.out
 tmp.cpp
