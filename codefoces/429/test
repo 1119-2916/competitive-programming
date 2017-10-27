@@ -1,0 +1,1 @@
+For example, let's find F(4, 2). All possible 2-element subsets of {1,2,3,4} are: {1, 2}, {1, 3}, {1, 4}, {2, 3}, {2, 4}, {3, 4}. Their minimal values are 1, 1, 1, 2, 2, 3. So the average (expected) value is F(4,2)=(1+1+1+2+2+3)/6=10/6=1.66666666

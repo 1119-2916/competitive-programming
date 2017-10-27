@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define INF 1010001000
+#define min(a, b) a<b?a:b
+
+int V, cost[16][16];
+
+int main(void)
+{
+    int i, j, k, s, t, ans;
+    scanf("%d", &V);
+    while (V) {
+        init(V*V+10);
+        for (i = 0; i <= V; i++) {
+            cost[i][0] = INF;
+        }
+        for (i = 1; i <= V; i++) {
+            for (j = 0; j <= V; j++) {
+                scanf("%d", &cost[j][i]);
+            }
+        }
+        for (i = 0; i <= V; i++) { 
+            for (j = 0; j <= V; j++) {
+                printf("%d  ", cost[i][j]);
+            }
+            puts("");
+        }
+        for (k = 0; k <= V; k++) {
+            for (i = 0; i <= V; i++) {
+                for (j = 0; j <= V; j++) {
+                    cost[i][j] = min(cost[i][j], cost[i][k] + cost[k][j]);
+                }
+            }
+        }
+        printf("%d\n", cost[0][V]);
+        scanf("%d", &V);
+    }
+    return 0;
+}
+        
+

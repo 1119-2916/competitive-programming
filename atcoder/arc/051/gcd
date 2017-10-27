@@ -1,0 +1,7 @@
+#Include <stdio.h>
+
+int counter = 0;
+
+int gcd(int a, int b) 
+{
+

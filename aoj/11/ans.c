@@ -1,0 +1,79 @@
+#include <stdio.h>
+int main(void) {
+    int board[10][7] = {{0}};
+    int i, ii, j, k, H, sum, flag0;
+    int number = 0, flag1 = 0, n, score = 0;
+
+    scanf("%d",&H);
+    while(H != 0 ) {
+        flag0 = 1 ;
+        score = 0 ;
+        for( i=0; i<H; i++) {
+            scanf("%d%d%d%d%d",&board[i][0],&board[i][1],&board[i][2],&board[i][3],&board[i][4]);
+        }
+
+
+        while(flag0 != 0 ) {
+            flag0 = 0;
+            for( i=0; i<H; i++ ) {
+                flag1 = 0;
+                for( j=0; j<5; j++ ) {
+                    number = board[i][j] ;
+                    if( number == board[i][j+1] ) {
+                        flag1++ ;
+                    } else {
+                        flag1 = 0;
+                    }
+                    if ( flag1 == 2 ) {
+                        for (n = j+1; n>j-2; n--) {
+                            score += number;
+                            board[i][n] = 0 ;
+                        }
+                        if(number == board[i][j+2] ) {
+                            board[i][j+2] = 0;
+                            score += number;
+                            if( number == board[i][j+3] ) {
+                                board[i][j+3] = 0;
+                                score += number;
+                            }
+                        }
+                        flag1 = 0;
+                        break;
+                    }
+                }
+            }
+            for( j=0; j<5; j++ ) {
+                sum = 0;
+                for( k=0; k<H; k++) {
+                    sum += board[k][j];
+                }
+                if(sum != 0) {
+                    for( i=H-1; i>=0; i--) {
+                        ii = i-1;
+                        if(board[i][j] == 0) {
+                            sum = 0;
+                            for( k=i; k>=0; k--) {
+                                sum += board[k][j];
+                            }
+                            if(sum == 0 ) {
+                                break;
+                            }
+                            while(board[i][j] == 0) {
+                                board[i][j] = board[ii][j] ;
+                                board[ii][j] = 0;
+                                ii--;
+                                flag0++;
+                                if(ii < 0) {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        printf("%d\n",score);
+        scanf("%d",&H);
+    }
+    return(0);
+}

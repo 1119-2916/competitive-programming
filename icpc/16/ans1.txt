@@ -1,0 +1,1465 @@
+TIE
+Z 6
+Z 6
+TIE
+TIE
+G 76
+M 6
+M 6
+P 4
+Z 6
+G 5
+P 5
+U 3
+M 5
+C 72
+TIE
+R 92
+R 54
+U 4
+P 4
+U 5
+G 6
+TIE
+M 5
+D 77
+M 5
+G 5
+F 72
+TIE
+W 83
+S 92
+R 76
+J 71
+M 5
+G 6
+P 4
+G 5
+M 5
+TIE
+M 5
+U 5
+TIE
+M 6
+G 6
+I 4
+TIE
+V 65
+G 6
+F 54
+H 80
+C 92
+TIE
+TIE
+TIE
+TIE
+G 6
+TIE
+Y 5
+G 5
+R 72
+M 6
+G 5
+L 70
+Z 6
+O 5
+M 6
+TIE
+Q 79
+M 5
+Z 5
+Y 6
+G 84
+Y 6
+G 5
+A 56
+V 62
+B 61
+U 4
+G 6
+Z 6
+Z 5
+G 5
+G 6
+P 4
+T 73
+TIE
+U 5
+M 5
+M 5
+M 6
+TIE
+TIE
+V 55
+V 85
+K 61
+H 47
+P 92
+TIE
+G 6
+TIE
+D 5
+Z 6
+Z 6
+TIE
+M 5
+D 73
+TIE
+TIE
+G 6
+TIE
+U 4
+TIE
+M 6
+TIE
+O 72
+Z 6
+TIE
+TIE
+U 4
+TIE
+Z 6
+N 62
+G 6
+Z 5
+Z 6
+Z 6
+Z 5
+G 5
+TIE
+H 60
+TIE
+U 4
+Z 5
+F 60
+Z 5
+G 6
+U 90
+TIE
+M 6
+H 50
+G 5
+J 49
+P 6
+G 5
+M 6
+G 6
+O 88
+H 62
+TIE
+N 86
+L 68
+G 5
+TIE
+B 77
+G 6
+X 47
+Z 5
+M 6
+M 6
+G 5
+TIE
+M 6
+TIE
+M 5
+I 67
+M 5
+G 5
+Z 5
+Z 6
+S 55
+O 4
+TIE
+T 50
+TIE
+G 6
+TIE
+TIE
+TIE
+Z 6
+G 66
+P 4
+K 76
+M 5
+TIE
+U 3
+Z 4
+Z 6
+A 82
+TIE
+D 4
+E 72
+Z 6
+Y 75
+O 5
+TIE
+P 27
+Y 5
+E 88
+Z 6
+Z 5
+P 3
+G 64
+Y 6
+O 5
+V 93
+B 77
+M 5
+N 79
+Z 5
+TIE
+TIE
+M 6
+G 6
+K 52
+U 4
+TIE
+Z 6
+Z 6
+G 5
+G 4
+Y 54
+O 4
+L 84
+TIE
+U 5
+TIE
+TIE
+G 6
+B 87
+Z 6
+TIE
+Z 6
+G 6
+G 5
+D 4
+M 5
+Z 5
+M 6
+G 6
+M 6
+B 100
+Z 6
+G 85
+E 95
+G 6
+M 6
+G 4
+R 78
+P 5
+G 5
+Z 5
+D 90
+G 5
+TIE
+M 5
+M 6
+N 74
+C 50
+G 5
+C 83
+Z 6
+TIE
+O 4
+Y 67
+TIE
+M 5
+TIE
+TIE
+M 96
+TIE
+Z 6
+M 5
+TIE
+X 95
+TIE
+TIE
+O 5
+TIE
+M 6
+J 74
+Z 4
+U 5
+G 6
+TIE
+M 5
+Z 6
+D 47
+O 4
+M 4
+P 5
+U 3
+M 6
+D 3
+P 4
+TIE
+P 5
+M 6
+G 5
+G 5
+J 83
+M 6
+P 58
+Z 6
+G 5
+Z 5
+TIE
+P 3
+TIE
+Z 6
+H 59
+D 91
+P 3
+K 92
+M 5
+T 86
+O 4
+TIE
+P 5
+TIE
+TIE
+Z 6
+Z 5
+O 5
+G 6
+TIE
+G 6
+Z 6
+TIE
+U 5
+O 3
+S 98
+TIE
+G 6
+TIE
+M 85
+G 6
+F 79
+M 5
+Z 5
+P 4
+X 96
+V 92
+E 67
+Z 5
+Q 51
+Z 5
+TIE
+O 4
+F 69
+TIE
+Z 5
+W 58
+TIE
+M 5
+M 6
+R 55
+S 66
+TIE
+G 6
+TIE
+M 5
+G 5
+Z 5
+TIE
+G 6
+U 3
+TIE
+A 50
+O 5
+V 78
+U 4
+M 6
+P 3
+TIE
+TIE
+E 79
+G 6
+M 5
+G 6
+G 5
+D 5
+Z 89
+Z 6
+O 81
+TIE
+Y 6
+U 74
+TIE
+I 5
+M 5
+M 5
+Y 6
+G 6
+O 94
+M 6
+M 6
+Q 61
+M 6
+T 89
+O 4
+G 5
+Z 6
+M 5
+J 72
+TIE
+D 5
+G 5
+Z 5
+G 5
+Z 6
+Z 6
+TIE
+C 74
+G 6
+TIE
+M 6
+TIE
+Z 6
+G 6
+T 81
+Y 6
+P 5
+X 63
+M 6
+TIE
+TIE
+G 6
+P 5
+Y 79
+P 56
+Z 5
+G 6
+D 5
+TIE
+Z 6
+P 5
+G 6
+U 4
+TIE
+TIE
+P 5
+L 77
+O 4
+G 6
+M 6
+TIE
+I 87
+O 97
+U 3
+Z 6
+Y 88
+TIE
+Y 5
+Z 6
+TIE
+O 5
+TIE
+Z 5
+G 6
+TIE
+J 48
+M 5
+H 97
+TIE
+W 69
+M 5
+O 4
+Z 6
+B 77
+U 3
+M 95
+TIE
+TIE
+P 5
+S 68
+Y 61
+TIE
+U 5
+G 6
+M 5
+M 5
+P 6
+Z 6
+TIE
+G 5
+Z 5
+M 6
+O 5
+TIE
+K 90
+Z 6
+Z 5
+M 6
+TIE
+Z 5
+H 54
+H 80
+Z 6
+Z 5
+Z 6
+TIE
+Z 6
+G 6
+P 6
+P 6
+TIE
+TIE
+M 6
+O 5
+Z 5
+J 71
+V 64
+TIE
+M 72
+O 5
+E 81
+TIE
+G 6
+Y 5
+O 5
+TIE
+M 5
+O 3
+U 5
+A 66
+TIE
+U 5
+TIE
+M 5
+G 5
+B 54
+TIE
+TIE
+TIE
+TIE
+K 77
+G 6
+TIE
+TIE
+O 3
+M 5
+P 5
+TIE
+M 6
+M 6
+G 97
+TIE
+TIE
+TIE
+Z 6
+M 5
+G 6
+G 5
+G 5
+P 5
+G 6
+K 49
+G 5
+M 5
+TIE
+M 5
+TIE
+TIE
+G 5
+G 5
+Y 6
+G 6
+Z 6
+E 90
+P 5
+I 91
+TIE
+TIE
+TIE
+H 86
+M 5
+Z 6
+Y 4
+P 73
+Z 5
+Z 6
+B 61
+Z 5
+Z 5
+G 5
+G 5
+G 5
+U 3
+E 48
+Z 4
+TIE
+Z 5
+TIE
+M 6
+U 4
+L 78
+S 2
+T 51
+I 5
+TIE
+G 5
+TIE
+M 5
+G 6
+Z 6
+C 58
+E 70
+C 78
+G 6
+G 5
+Z 5
+M 4
+G 6
+M 5
+TIE
+G 5
+G 6
+M 6
+M 5
+TIE
+S 54
+Z 6
+O 4
+Z 6
+TIE
+G 6
+TIE
+U 40
+Z 6
+M 6
+G 5
+P 65
+M 6
+TIE
+U 60
+O 5
+F 78
+TIE
+M 5
+M 6
+W 94
+U 5
+TIE
+M 6
+P 69
+Z 6
+N 95
+M 6
+D 97
+G 5
+T 65
+G 6
+G 5
+Z 5
+G 5
+N 63
+O 58
+G 6
+TIE
+Z 5
+G 6
+M 6
+S 66
+G 5
+P 4
+Z 5
+TIE
+O 4
+G 5
+P 4
+TIE
+P 50
+P 98
+M 6
+TIE
+Z 5
+F 69
+TIE
+Z 6
+V 84
+TIE
+TIE
+I 4
+G 5
+Z 6
+Z 6
+TIE
+M 5
+G 6
+TIE
+Q 75
+J 74
+M 79
+D 4
+Z 4
+E 1
+Z 5
+M 5
+P 5
+O 5
+TIE
+G 5
+M 6
+TIE
+P 5
+M 6
+TIE
+TIE
+M 6
+M 5
+Z 5
+G 5
+M 5
+TIE
+P 5
+O 5
+TIE
+G 5
+TIE
+Z 6
+U 5
+Z 5
+H 72
+M 6
+S 66
+TIE
+M 6
+G 6
+I 52
+P 4
+Z 5
+M 5
+U 3
+TIE
+P 78
+M 5
+Z 6
+TIE
+TIE
+I 5
+M 5
+TIE
+U 4
+Z 5
+G 5
+O 77
+G 5
+M 6
+TIE
+Z 6
+TIE
+Q 65
+A 60
+M 6
+G 5
+G 6
+L 61
+G 6
+TIE
+G 5
+TIE
+I 60
+I 98
+M 5
+M 71
+Z 6
+M 6
+TIE
+Z 5
+M 6
+P 3
+TIE
+W 73
+D 3
+J 90
+TIE
+TIE
+TIE
+Y 82
+M 6
+M 6
+M 6
+U 4
+A 61
+G 5
+G 5
+C 77
+G 6
+P 5
+O 5
+TIE
+Z 5
+O 4
+Z 6
+Z 6
+O 3
+K 71
+Q 60
+Z 5
+M 5
+TIE
+TIE
+A 59
+TIE
+M 6
+D 91
+F 49
+H 86
+P 3
+M 6
+V 53
+D 64
+M 5
+Z 6
+TIE
+P 5
+G 6
+G 6
+C 87
+G 6
+B 93
+M 6
+M 4
+Z 5
+TIE
+TIE
+M 5
+Z 6
+P 4
+G 5
+W 92
+M 6
+Z 6
+TIE
+M 5
+TIE
+TIE
+TIE
+Y 4
+Z 5
+E 50
+TIE
+I 4
+M 5
+I 5
+TIE
+TIE
+M 5
+D 73
+S 58
+Z 5
+Z 6
+T 80
+M 86
+TIE
+Z 70
+B 43
+U 89
+G 6
+J 65
+M 6
+Z 6
+Z 4
+G 5
+P 5
+M 6
+V 71
+TIE
+TIE
+G 6
+TIE
+Z 77
+G 6
+M 6
+U 5
+U 5
+W 66
+O 74
+P 5
+M 6
+TIE
+M 5
+TIE
+M 53
+G 6
+TIE
+TIE
+O 5
+M 6
+Z 6
+Z 6
+G 6
+Z 5
+TIE
+M 6
+M 6
+M 6
+M 6
+P 4
+G 6
+M 5
+P 4
+TIE
+T 80
+M 6
+O 5
+TIE
+Z 6
+Z 6
+O 4
+O 95
+P 4
+M 6
+Q 64
+TIE
+Z 61
+TIE
+Z 6
+M 6
+TIE
+G 6
+P 5
+P 73
+G 4
+Z 5
+M 6
+TIE
+O 4
+G 5
+O 70
+TIE
+W 55
+N 91
+U 79
+G 6
+TIE
+TIE
+Z 5
+Z 6
+TIE
+D 4
+P 99
+D 64
+D 4
+TIE
+K 67
+Z 5
+M 6
+TIE
+G 6
+G 6
+Q 61
+N 95
+TIE
+D 3
+G 6
+Z 6
+Z 6
+D 60
+X 66
+G 6
+G 6
+H 62
+TIE
+T 53
+G 6
+P 71
+M 5
+TIE
+I 4
+Y 6
+M 5
+U 4
+I 3
+G 5
+TIE
+TIE
+Z 6
+G 6
+TIE
+G 6
+TIE
+W 71
+TIE
+Z 5
+E 56
+TIE
+TIE
+T 77
+U 73
+Z 5
+Z 6
+Z 5
+P 5
+F 71
+X 90
+U 5
+G 6
+Z 5
+G 6
+Z 6
+A 93
+Z 6
+M 5
+TIE
+M 6
+U 5
+G 5
+Z 6
+Z 6
+M 5
+U 4
+O 5
+TIE
+K 70
+G 6
+Z 5
+P 6
+M 6
+G 5
+U 4
+M 5
+TIE
+Z 6
+W 65
+Z 5
+Z 5
+TIE
+TIE
+TIE
+TIE
+P 6
+TIE
+C 70
+I 68
+Z 6
+M 5
+G 5
+U 5
+Z 6
+TIE
+U 5
+Z 6
+I 5
+W 61
+M 5
+TIE
+I 4
+Z 6
+U 5
+Z 5
+G 4
+P 5
+I 94
+Z 6
+C 51
+Z 6
+A 65
+M 5
+O 5
+M 4
+M 5
+M 6
+TIE
+TIE
+Y 5
+Z 5
+Z 5
+Y 5
+TIE
+P 5
+TIE
+R 63
+B 79
+M 5
+G 6
+G 4
+I 3
+I 3
+C 92
+G 6
+S 51
+Q 77
+Z 5
+P 4
+G 5
+TIE
+TIE
+P 4
+S 93
+G 5
+TIE
+V 68
+Z 5
+G 6
+M 6
+M 5
+G 5
+G 5
+U 4
+Z 5
+TIE
+M 4
+Z 6
+M 4
+TIE
+G 6
+TIE
+O 5
+Y 6
+G 6
+U 5
+B 87
+Z 5
+Y 5
+TIE
+G 6
+Z 5
+Z 4
+M 5
+O 5
+TIE
+P 4
+K 55
+M 5
+TIE
+Z 6
+X 59
+P 4
+M 6
+P 5
+P 4
+G 5
+M 5
+TIE
+U 4
+G 6
+O 3
+TIE
+M 6
+U 5
+Z 6
+P 6
+U 4
+A 62
+U 3
+P 5
+D 4
+Z 97
+M 5
+TIE
+TIE
+Z 6
+Z 4
+M 5
+G 84
+TIE
+TIE
+E 93
+P 5
+G 5
+M 63
+O 3
+TIE
+D 5
+G 6
+M 5
+S 53
+Z 5
+TIE
+W 93
+E 52
+G 4
+TIE
+M 4
+Y 76
+TIE
+G 5
+U 4
+Z 6
+M 6
+P 3
+U 5
+U 53
+TIE
+G 5
+Z 6
+W 58
+TIE
+E 68
+U 89
+Z 5
+L 69
+M 6
+Z 5
+L 67
+Z 4
+P 4
+Z 5
+Z 4
+Z 5
+TIE
+M 5
+TIE
+M 6
+M 6
+C 96
+TIE
+Z 5
+N 77
+G 5
+Z 6
+A 60
+H 99
+TIE
+G 6
+TIE
+Z 5
+TIE
+TIE
+I 5
+G 5
+TIE
+M 6
+G 71
+Z 5
+M 5
+TIE
+J 76
+J 86
+M 4
+O 4
+X 86
+P 5
+G 6
+C 70
+P 6
+Z 81
+G 6
+TIE
+U 5
+O 97
+TIE
+TIE
+G 6
+G 6
+TIE
+F 84
+TIE
+P 5
+G 6
+P 4
+TIE
+O 5
+D 5
+T 77
+TIE
+TIE
+P 5
+TIE
+TIE
+S 80
+G 5
+TIE
+V 90
+TIE
+TIE
+M 5
+TIE
+P 5
+F 71
+O 4
+Z 5
+TIE
+M 6
+L 57
+Z 91
+TIE
+TIE
+TIE
+M 6
+G 5
+TIE
+TIE
+H 95
+Z 6
+TIE
+TIE
+C 75
+TIE
+O 87
+Y 4
+TIE
+TIE
+O 96
+M 6
+Y 50
+H 86
+Z 6
+Z 5
+G 6
+M 5
+TIE
+TIE
+I 68
+W 89
+G 4
+TIE
+G 6
+D 75
+TIE
+M 6
+I 3
+T 78
+Z 5
+G 4
+TIE
+Z 5
+G 6
+X 70
+Y 5
+TIE
+O 5
+M 5
+G 5
+E 61
+S 62
+TIE
+H 73
+A 53
+M 5
+TIE
+I 4
+TIE
+Z 5
+D 87
+TIE
+P 3
+TIE
+S 83
+M 6
+TIE
+Z 6
+W 94
+G 5
+Z 6
+T 55
+TIE
+TIE
+T 61
+TIE
+TIE
+D 3
+M 6
+O 4
+R 88
+M 96
+TIE
+M 6
+P 6
+G 5
+TIE
+TIE
+Z 5
+W 76
+V 82
+P 5
+O 3
+G 4
+TIE
+TIE
+TIE
+TIE
+M 5
+G 5
+U 5
+T 92
+TIE
+TIE
+TIE
+M 6
+Z 5
+Z 6
+M 5
+TIE
+Z 5
+P 51
+TIE
+G 5
+K 77
+TIE
+U 5
+M 6
+M 6
+P 6
+Z 5
+G 58
+TIE
+B 50
+S 77
+Z 6
+B 90
+Z 6
+M 6
+S 89
+M 6
+D 92
+G 5
+T 58
+G 6
+TIE
+P 69
+TIE
+W 82
+G 5
+TIE
+TIE
+TIE
+Z 5
+M 5
+Y 89
+Z 6
+G 5
+Z 99
+TIE
+Z 99
+Y 6
+O 3
+M 91
+TIE
+TIE
+O 5
+TIE
+G 5
+TIE
+G 6
+TIE
+G 6
+M 6
+G 6
+TIE
+TIE
+TIE
+TIE
+TIE
+P 3
+C 67
+R 91
+M 6
+P 4
+M 60
+TIE
+TIE
+M 92
+M 4
+TIE
+G 6
+M 6
+O 4
+I 74
+G 5
+O 3
+M 6
+Y 4
+J 55

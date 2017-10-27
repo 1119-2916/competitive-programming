@@ -1,0 +1,4 @@
+/hack
+*.class
+*.out
+tmp.cpp

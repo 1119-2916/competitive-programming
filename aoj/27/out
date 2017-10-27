@@ -1,0 +1,25 @@
+0:
+1:
+2:
+3:
+road0 1 0 3
+road1 2 1 2
+0:
+1:
+2:
+road0 0 1
+road1 1 2
+3:
+road0 1 0 3
+road1 2 1 2
+0:
+1:
+road0 1 2
+road1 2 0
+2:
+road0 0 1
+road1 1 2
+3:
+road0 1 0 3
+road1 2 1 2
+3
