@@ -18,6 +18,7 @@ using namespace std;
 #define vb vector<bool>
 #define vvb vector<vb >
 #define vp vector< i_i >
+#define vd vector<double>
 #define all(a) (a).begin(), (a).end()
 #define Int(x) int x; cin >> x;
 #define int2(x, y) Int(x); Int(y);
@@ -28,13 +29,15 @@ using namespace std;
 #define fsec first.second
 #define sfir second.first
 #define ssec second.second
+#define Decimal fixed << setprecision(10)
+
 
 //int dxy[5] = {0, 1, 0, -1, 0};
 // // assign avl ncm dijkstra geo2 kruskal graph uf lca BIT
 // matrix dinic next_combination topcoder lcm vi st gin
 
-typedef int Weight;
-typedef int Flow;
+using Weight = double;
+using Flow = int;
 struct Edge {
     int s, d; Weight w; Flow c;
     Edge() {};
@@ -44,24 +47,22 @@ bool operator<(const Edge &e1, const Edge &e2) { return e1.w < e2.w; }
 bool operator>(const Edge &e1, const Edge &e2) { return e2 < e1; }
 inline ostream &operator<<(ostream &os, const Edge &e) { return (os << '(' << e.s << ", " << e.d << ", " << e.w << ')'); }
 
-typedef vector<Edge> Edges;
-typedef vector<Edges> Graph;
-typedef vector<Weight> Array;
-typedef vector<Array> Matrix;
+using Edges = vector<Edge>;
+using Graph = vector<Edges>;
+using Array = vector<Weight>;
+using Matrix = vector<Array>;
 
-void addArc(Graph &g, int s, int d, int w = 1) {
-    g[s].push_back(Edge(s, d, w));
+void addArc(Graph &g, int s, int d, Weight w = 1) {
+    g[s].emplace_back(s, d, w);
 }
-void addEdge(Graph &g, int a, int b, int w = 1) {
+void addEdge(Graph &g, int a, int b, Weight w = 1) {
     addArc(g, a, b, w);
     addArc(g, b, a, w);
 }
 
-Graph g;
-
 //単一始点最短経路(負閉路なし)
 //Dijkstra O((|E|+|V|)log|V|)
-//dist: 始点から各頂点までの最短距離, assignされるので安心して欲しい
+//dist: 始点から各頂点までの最短距離
 //戻り値: 最短経路木の親頂点(根は-1)
 vector<int> dijkstra(const Graph &g, int s, Array &dist) {
     int n = g.size();
@@ -70,22 +71,17 @@ vector<int> dijkstra(const Graph &g, int s, Array &dist) {
     vector<int> color(n, WHITE); color[s] = GRAY;
     vector<int> prev(n, -1);
     dist.assign(n, INF); dist[s] = 0;
-    //始点からの最短距離 子 親
-    typedef pair< int, pair < int, int > > State;
-    priority_queue<State, vector<State>, greater<State> > pq;
-    pq.push(State(0, i_i(s, -1)));
+    using State = tuple<Weight, int, int>; //始点からの最短距離 子 親
+    priority_queue<State, vector<State>, greater<State>> pq; pq.emplace(0, s, -1);
     while (pq.size()) {
-        Weight d = pq.top().first; 
-        int v = pq.top().second.first, u = pq.top().second.second; 
-        pq.pop();
+        Weight d; int v, u; tie(d, v, u) = pq.top(); pq.pop();
         if (dist[v] < d)continue;
         color[v] = BLACK; prev[v] = u;
-        for (int i = 0; i < g[v].size(); i++) {
-            Edge e = g[v][i];
+        for (auto &e : g[v]) {
             if (color[e.d] == BLACK)continue;
             if (dist[e.d] > dist[v] + e.w) {
                 dist[e.d] = dist[v] + e.w;
-                pq.push(State(dist[e.d], i_i(e.d, v)));
+                pq.emplace(dist[e.d], e.d, v);
                 color[e.d] = GRAY;
             }
         }
@@ -93,18 +89,11 @@ vector<int> dijkstra(const Graph &g, int s, Array &dist) {
     return prev;
 }
 
-map<i_i, int> id;
-int ptr;
-
-int getid(int a, int b)
+double funami_yui(pair<i_i, int> a, pair<i_i, int> b)
 {
-    if (id.find(i_i(a, b)) == id.end()) {
-        id.insert(mp(i_i(a, b), ptr));
-        g.pb(Edges());
-        return ptr++;
-    } else {
-        return id[i_i(a, b)];
-    }
+    double tmp = pow((a.ffir - b.ffir), 2) + pow((a.fsec - b.fsec), 2);
+    tmp = sqrt(tmp);
+    return max(tmp - a.sec - b.sec, 0.0);
 }
 
 signed main()
@@ -112,34 +101,22 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    int2(n, m);
-    if (!m) {
-        if (n == 1) cout << 0 << endl;
-        else cout << -1 << endl;
-        return 0;
+    int2(sx, sy); int2(gx, gy);
+    Int(n);
+    Graph g(n+2);
+    vector<pair<i_i, int>> points(n+2);
+    points[0] = mp(i_i(sx, sy), 0); points[n+1] = mp(i_i(gx, gy), 0);
+    for (int i = 1; i <= n; i++) {
+        cin >> points[i].ffir >> points[i].fsec >> points[i].sec;
     }
-    vvi ec(n);
-    for (int i = 0; i < m; i++) {
-        int tmpx, tmpy, color;
-        cin >> tmpx >> tmpy >> color;
-        tmpx--; tmpy--;
-        ec[tmpx].pb(color);
-        ec[tmpy].pb(color);
-        int a = getid(tmpx, color), b = getid(tmpy, color);
-        addEdge(g, a, b, 0);
-    }
-    rep(i, n) {
-        for (int j : ec[i]) {
-            int from = getid(i, j), to = getid(i, -1);
-            addArc(g, from, to, 0);
-            addArc(g, to, from, 1);
+    rep(i, points.size()) {
+        rep(j, i) {
+            addEdge(g, i, j, funami_yui(points[i], points[j]));
         }
     }
-    cout << g.size() << endl;
-    vi dist;
-    dijkstra(g, getid(0, -1), dist);
-    if (dist[getid(n-1, -1)] == INF) cout << -1 << endl;
-    else cout << dist[getid(n-1, -1)] << endl;
+    vd dist;
+    dijkstra(g, 0, dist);
+    cout << Decimal << dist[g.size()-1] << endl;
 
     return 0;
 }
