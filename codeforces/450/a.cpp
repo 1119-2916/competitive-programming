@@ -38,27 +38,25 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    int2(n, k);
-    vector<int> data(n);
-    for (int i = 0; i < n; i++) {
-        cin >> data[i];
-    }
-
-    sort(all(data));
-
-    map<int, int> funami;
-    funami[0] = 1;
+    Int(n);
+    int a = 0, b = 0;
     rep(i, n) {
-        map<int, int> nxt;
-        for (auto j = funami.begin(); j != funami.end(); j++) {
-            nxt[j->fir] = (nxt[j->fir] + j->sec) % MOD;
-            nxt[j->fir ^ data[i]] = (nxt[j->fir ^ data[i]] + j->sec) % MOD;
+        int2(x, y);
+        if (x < 0) {
+            a++;
+        } else {
+            b++;
         }
-        funami = nxt;
     }
-    cout << funami[k] << endl;
+    if (a <= 1 || b <= 1) {
+        cout << "NO" << endl;
+    } else {
+        cout << "YES" << endl;
+    }
+
 
     return 0;
 }
+
 
 

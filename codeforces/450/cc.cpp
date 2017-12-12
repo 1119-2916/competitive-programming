@@ -33,32 +33,38 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
+int n, mx, a[100010], ans, c[100010], self[100010];
+set<int> s;
+
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    int2(n, k);
-    vector<int> data(n);
-    for (int i = 0; i < n; i++) {
-        cin >> data[i];
-    }
-
-    sort(all(data));
-
-    map<int, int> funami;
-    funami[0] = 1;
-    rep(i, n) {
-        map<int, int> nxt;
-        for (auto j = funami.begin(); j != funami.end(); j++) {
-            nxt[j->fir] = (nxt[j->fir] + j->sec) % MOD;
-            nxt[j->fir ^ data[i]] = (nxt[j->fir ^ data[i]] + j->sec) % MOD;
+    cin >> n;
+    Rep(i, n+1) {
+        cin >> a[i];
+        if (s.upper_bound(a[i]) != s.end()) {
+            int u = *s.upper_bound(a[i]);
+            if (s.upper_bound(u) == s.end()) 
+                c[u]++;
+        } else {
+            self[a[i]] = 1;
         }
-        funami = nxt;
+        s.insert(a[i]);
     }
-    cout << funami[k] << endl;
+    mx = c[1] - self[1];
+    ans = 1;
+    Rep(i, n+1) {
+        if (mx < c[i] - self[i]) {
+            mx = max(mx, c[i]);
+            ans = i;
+        }
+    }
+    cout << ans << endl;
 
     return 0;
 }
+
 
 

@@ -33,32 +33,41 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
+int n, a[101000], tr[404000], ll, rr, x, ans1, ans2, num, ma[101000], w;
+
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    int2(n, k);
-    vector<int> data(n);
-    for (int i = 0; i < n; i++) {
-        cin >> data[i];
+    cin >> n;
+    Rep(i, n+1) {
+        cin >> a[i];
+        ma[i] = max(ma[i-1], a[i]);
     }
-
-    sort(all(data));
-
-    map<int, int> funami;
-    funami[0] = 1;
-    rep(i, n) {
-        map<int, int> nxt;
-        for (auto j = funami.begin(); j != funami.end(); j++) {
-            nxt[j->fir] = (nxt[j->fir] + j->sec) % MOD;
-            nxt[j->fir ^ data[i]] = (nxt[j->fir ^ data[i]] + j->sec) % MOD;
+    ans1 = -100000000;
+    Rep(i, n+1) {
+        if (a[i] > ma[i-1]) {
+            num = -1; w = ma[i-1];
+            for (int j = i+1; j < n+1; j++) {
+                if (a[j] > a[i]) break;
+                else {
+                    if (a[j] > w && a[j] < a[i]) num++;
+                    w = max(w, a[j]);
+                }
+            }
+        } else {
+            num = 0;
         }
-        funami = nxt;
+        if (num > ans1) {
+            ans1 = num; ans2 = a[i];
+        } else if (num == ans1 && ans2 > a[i]) ans2 = a[i];
     }
-    cout << funami[k] << endl;
+    cout << ans2 << endl;
 
     return 0;
 }
+
+
 
 
