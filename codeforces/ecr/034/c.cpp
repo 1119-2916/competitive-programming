@@ -38,16 +38,19 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string st;
-    cin >> st;
-    vi cnt(6, 0);
-    rep(i, st.size()) {
-        cnt[st[i] - 'A']++;
+    Int(n);
+    map<int, int> data;
+    for (int i = 0; i < n; i++) {
+        Int(tmp);
+        data[tmp]++;
     }
-    rep(i, 5) {
-        cout << cnt[i] << " ";
+
+    int ans = 0;
+    for (auto i = data.begin(); i != data.end(); i++) {
+        ans = max(ans, i->second);
     }
-    cout << cnt[5] << endl;
+
+    cout << ans << endl;
 
     return 0;
 }

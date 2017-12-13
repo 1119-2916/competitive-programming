@@ -38,16 +38,33 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string st;
-    cin >> st;
-    vi cnt(6, 0);
-    rep(i, st.size()) {
-        cnt[st[i] - 'A']++;
+    int3(h1, a1, c);
+    int2(h2, a2);
+    int ans = 0;
+    string st = "STRIKE", he = "HEAL";
+    vector<string> output(0);
+    while (h2 > 0) {
+        if (h1 <= a2 && a1 < h2) {
+            output.pb(he);
+            h1 += c - a2;
+        } else {
+            output.pb(st);
+            h2 -= a1;
+            h1 -= a2;
+        }
+        //cout << h1 << " " << h2 << endl;
     }
-    rep(i, 5) {
-        cout << cnt[i] << " ";
+    cout << output.size() << endl;
+    rep(i, output.size()) {
+        cout << output[i] << endl;
     }
-    cout << cnt[5] << endl;
+
 
     return 0;
 }
+
+
+
+
+
+

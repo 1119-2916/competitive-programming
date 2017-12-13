@@ -38,16 +38,28 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string st;
-    cin >> st;
-    vi cnt(6, 0);
-    rep(i, st.size()) {
-        cnt[st[i] - 'A']++;
+    Int(n);
+    vector<int> data(n);
+    for (int i = 0; i < n; i++) {
+        cin >> data[i];
     }
-    rep(i, 5) {
-        cout << cnt[i] << " ";
+
+    map<int, int> funami;
+    int ans = 0, sum = 0;
+    rep(i, n) {
+        ans += (i - funami[data[i]-1]-funami[data[i]]-funami[data[i]+1])
+                    * data[i] - (sum - funami[data[i]-1] * (data[i]-1) 
+                    - funami[data[i]] * (data[i])
+                    - funami[data[i]+1] * (data[i]+1));
+        funami[data[i]]++;
+        sum += data[i];
     }
-    cout << cnt[5] << endl;
+    cout << ans << endl;
 
     return 0;
 }
+
+
+
+
+

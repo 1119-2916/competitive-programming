@@ -38,16 +38,20 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string st;
-    cin >> st;
-    vi cnt(6, 0);
-    rep(i, st.size()) {
-        cnt[st[i] - 'A']++;
+    vector<string> input(12);
+    rep(i, 12) {
+        cin >> input[i];
     }
-    rep(i, 5) {
-        cout << cnt[i] << " ";
+    int ans = 0;
+    rep(i, 12) {
+        rep(j, input[i].size()) {
+            if (input[i][j] == 'r') {
+                ans++;
+                break;
+            }
+        }
     }
-    cout << cnt[5] << endl;
+    cout << ans << endl;
 
     return 0;
 }

@@ -38,16 +38,9 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string st;
-    cin >> st;
-    vi cnt(6, 0);
-    rep(i, st.size()) {
-        cnt[st[i] - 'A']++;
-    }
-    rep(i, 5) {
-        cout << cnt[i] << " ";
-    }
-    cout << cnt[5] << endl;
+    int3(a, b, c);
+    a -= c;
+    cout << a / (b+c) << endl;
 
     return 0;
 }

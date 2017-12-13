@@ -40,14 +40,11 @@ signed main()
 
     string st;
     cin >> st;
-    vi cnt(6, 0);
+    int ans = 0;
     rep(i, st.size()) {
-        cnt[st[i] - 'A']++;
+        ans += (st[i] - '0');
     }
-    rep(i, 5) {
-        cout << cnt[i] << " ";
-    }
-    cout << cnt[5] << endl;
+    cout << ans << endl;
 
     return 0;
 }

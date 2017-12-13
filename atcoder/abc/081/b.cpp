@@ -38,16 +38,30 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string st;
-    cin >> st;
-    vi cnt(6, 0);
-    rep(i, st.size()) {
-        cnt[st[i] - 'A']++;
+    int ans = 0;
+    Int(n);
+    vector<int> data(n);
+    for (int i = 0; i < n; i++) {
+        cin >> data[i];
     }
-    rep(i, 5) {
-        cout << cnt[i] << " ";
+
+    while (1) {
+        bool ok = true;
+        rep(i, n) {
+            if (data[i] % 2) ok = false;
+        }
+        if (ok) {
+            ans++;
+            rep(i, n) data[i] /= 2;
+        } else {
+            break;
+        }
     }
-    cout << cnt[5] << endl;
+    cout << ans << endl;
+
+
+
+    
 
     return 0;
 }

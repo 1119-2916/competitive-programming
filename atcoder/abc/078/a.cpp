@@ -38,16 +38,15 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string st;
-    cin >> st;
-    vi cnt(6, 0);
-    rep(i, st.size()) {
-        cnt[st[i] - 'A']++;
+    char a, b;
+    cin >> a >> b;
+    if (a == b) {
+        cout << "=" << endl;
+    } else if (a < b) {
+        cout << "<" << endl;
+    } else {
+        cout << ">" << endl;
     }
-    rep(i, 5) {
-        cout << cnt[i] << " ";
-    }
-    cout << cnt[5] << endl;
 
     return 0;
 }
