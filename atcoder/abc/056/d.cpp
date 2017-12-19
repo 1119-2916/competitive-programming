@@ -39,54 +39,56 @@ signed main()
     std::cin.tie(0);
 
     int2(n, k);
-    vector<int> data(n);
+    vector<int> data(0);
     int sum = 0;
     for (int i = 0; i < n; i++) {
-        cin >> data[i];
-        sum += data[i];
+        Int(tmp);
+        if (tmp < k) {
+            data.pb(tmp);
+            sum += tmp;
+        }
     }
     if (sum < k) {
-        cout << n << endl;
+        cout << data.size() << endl;
         return 0;
     }
 
-    sort(all(data));
-    reverse(all(data));
+    sort(all(data)); reverse(all(data));
 
-        vb dp(k, false);
-        dp[0] = true;
-        rep(i, n-1) {
-            for (int j = k - data[i]-1; j >= 0; j--) {
-                if (dp[j]) {
-                    dp[j+data[i]] = true;
-                }
+    vb dp(k, false);
+    dp[0] = true;
+    rep(i, data.size()-1) {
+        for (int j = dp.size()-1; j >= 0; j--) {
+            if (dp[j] && j + data[i] < dp.size()) {
+                dp[j + data[i]] = true;
             }
         }
-        bool ok = false;
-        for (int i = k-data[n]; i < k; i++) {
-            ok |= data[n];
-        }
-        if (ok) {
-            cout << 0 << endl;
-            return 0;
-        }
+    }
+    bool ok = false;
+    for (int i = k - data.back(); i < k; i++) {
+        ok |= dp[i];
+    }
+    if (ok) {
+        cout << 0 << endl;
+        return 0;
+    }
 
-    int l = 0, r = n;
+    int l = 0, r = data.size();
     while (r - l > 1) {
         int mid = (r + l) / 2;
-        vb dp(k, false);
+        dp = vb(k, false);
         dp[0] = true;
-        rep(i, n) {
+        rep(i, data.size()) {
             if (i == mid) continue;
-            for (int j = k - data[i]-1; j >= 0; j--) {
-                if (dp[j]) {
-                    dp[j+data[i]] = true;
+            for (int j = dp.size()-1; j >= 0; j--) {
+                if (dp[j] && j + data[i] < dp.size()) {
+                    dp[j + data[i]] = true;
                 }
             }
         }
         bool ok = false;
-        for (int i = k-data[mid]; i < k; i++) {
-            ok |= data[mid];
+        for (int i = k - data[mid]; i < k; i++) {
+            ok |= dp[i];
         }
         if (ok) {
             l = mid;
@@ -95,11 +97,8 @@ signed main()
         }
     }
 
-    cout << n - l +1 << endl;
+    cout << data.size() - l - 1 << endl;
 
     return 0;
 }
-
-
-
 

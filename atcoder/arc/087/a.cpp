@@ -10,7 +10,7 @@ using namespace std;
 #define Rep(i, N) for (int i = 1; i < N; i++)
 #define For(i, a, b) for (int i = (a); i < (b); i++)
 #define pb push_back
-#define eb emplece_back
+#define eb emplace_back
 #define mp make_pair
 #define i_i pair<int, int>
 #define vi vector<int>
@@ -28,50 +28,35 @@ using namespace std;
 #define fsec first.second
 #define sfir second.first
 #define ssec second.second
-#define Decimal fixed << setprecision(3)
+#define Decimal fixed << setprecision(10)
 
 //int dxy[5] = {0, 1, 0, -1, 0};
-// assign avl ncm dijkstra geo2 kruskal graph uf lca BIT
-// matrix dinic next_combination topcoder lcm
+// cmd
 
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string st;
-    cin >> st;
+    Int(n);
+    map<int, int> funami;
+    rep(i, n) {
+        Int(tmp);
+        funami[tmp]++;
+    }
 
-    vvi pos(26, vi(1, st.size()+1));
-    vi dp(st.size()+2, INF-1);
-    dp[st.size()+1] = 0;
-    vi back(st.size()+1, INF-1);
-    for (int i = st.size(); i >= 0; i--) {
-        if (i != st.size()) pos[st[i]-'a'].pb(i);
-        int ptr = st.size()+1;
-        rep(j, 26) {
-            if (dp[i] > dp[pos[j].back()]+1) {
-                dp[i] = dp[pos[j].back()]+1;
-                ptr = pos[j].back();
-            }
+    int ans = 0;
+    for (auto i = funami.begin(); i != funami.end(); i++) {
+        if (i->fir < i->sec) {
+            ans += i->sec - i->fir;
+        } else if (i->fir > i->sec) {
+            ans += i->sec;
         }
-        back[i] = ptr;
     }
- 
-    rep(i, dp.size()) {
-        cout << dp[i] << " ";
-    }
-    cout << endl;
-
-    rep(i, back.size()) {
-        cout << back[i] << " ";
-    }cout << endl;
-    
-    int now = back[0];
-    while (now < st.size()+1) {
-        
+    cout << ans << endl;
 
 
     return 0;
 }
+
 

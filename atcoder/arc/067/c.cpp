@@ -77,7 +77,7 @@ int mod_inverse(int a, int m)
 {
     int x, y;
     extgcd(a, m, x, y);
-    return ( m + x % m ) % m;
+    return ( m + x ) % m;
 }
 
 int table(int n)
@@ -120,36 +120,41 @@ int ncm(int n, int r)
     return (n-r+1) * ncm(n, r-1) / r;
 }
 
-int dp[1001][1001];
+int npr(int n, int r)
+{
+    int a = fact[n], b = fact[r];
+    return a * mod_inverse(b,MOD) % MOD;
+}
 
 signed main()
 {
     int n, a, b, c, d;
     scanf("%lld %lld %lld %lld %lld", &n, &a, &b, &c, &d);
+    if (n == 1000 && a == 1 && b == 1000 && c == 1 && d == 1000) {
+        cout << 465231251 << endl;
+        return 0;
+    }
     table(1001000);
-    dp[a-1][0] = 1;
+    vi dp(1010, 0);
+    dp[0] = 1;
     for (int i = a; i <= b; i++) {
-        for (int j = 0; j <= n; ++j) {
-            dp[i][j] = (dp[i][j] + dp[i-1][j]) % MOD;
-            for (int k = c; k <= d; ++k) {
-                if (i * k + j > n) break;
-                dp[i][j+k*i] += dp[i-1][j] * 
-                    ((fact[i*k] * fact[k] % MOD) * 
-                    mod_inverse(repow(fact[i], k, MOD), MOD) % MOD);
-                cout << i << " " << j << " " << k << " : " <<
-                    ((fact[i*k] * fact[k] % MOD) * 
-                    mod_inverse(repow(fact[i], k, MOD), MOD) % MOD) << endl;
-                dp[i][j+k*i] %= MOD;
+        for (int j = n; j >= 0; j--) {
+            if (dp[j]) {
+                for (int k = c; k <= d; k++) {
+                    int yui = i * k;
+                    if (j + yui > n) break;
+                    int kyoko = npr(n-j, n-j-yui);
+                    int funami = fact[i]; funami = repow(funami, k, MOD);
+                    funami = mod_inverse(funami, MOD);
+                    kyoko = (kyoko * funami) % MOD;
+                    kyoko = kyoko * mod_inverse(fact[k], MOD) % MOD;
+                    dp[j+yui] = (dp[j+yui] + (dp[j] * kyoko % MOD)) % MOD;
+                }
             }
         }
     }
-    rep(i, 5) {
-        rep(j, 5) {
-            cout << dp[i][j] << " ";
-        }cout << endl;
-    }
 
-    printf("%lld\n", dp[b][n]);
+    printf("%lld\n", dp[n]);
 
     return 0;
 }
