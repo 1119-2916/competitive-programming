@@ -60,7 +60,7 @@ signed main()
         back[i] = ptr;
         ans[i] = (ch + 'a');
     }
-    /*
+ 
     rep(i, dp.size()) {
         cout << dp[i] << " ";
     } cout << endl;
@@ -72,7 +72,7 @@ signed main()
     rep(i, ans.size()) {
         cout << ans[i] << " ";
     } cout << endl;
-    */
+    
     int now = 0;
     while (now < st.size()+1) {
         cout << ans[now];
