@@ -80,38 +80,35 @@ signed main()
         addEdge(g, x, y);
     }
 
-    vi depth(n, -1);
-    dfs(g, depth, 0, 0);
-    int pos = 0;
-    rep(i, depth.size()) {
-        if (depth[pos] < depth[i]) {
-            pos = i;
+    int ans = INF;
+    if (k % 2) {
+        for (auto i : g) {
+            for (auto j : i) {
+                vi depth(n, -1);
+                depth[j.s] = 0; depth[j.d] = 0;
+                dfs(g, depth, j.s, 0); dfs(g, depth, j.d, 0);
+                int cnt = 0;
+                rep(l, depth.size()) {
+                    cnt += (depth[l] > k/2) ? 1 : 0;
+                }
+                ans = min(cnt, ans);
+            }
+        }
+    } else {
+        rep(i, n) {
+            //cout << "call : " << i << endl;
+            vi depth(n, -1);
+            dfs(g, depth, i, 0);
+            int cnt = 0;
+            //rep(j, depth.size()) cout << depth[j] << " ";cout << endl;
+            rep(j, depth.size()) {
+                cnt += (depth[j] > k/2) ? 1 : 0;
+            }
+            ans = min(cnt, ans);
+            //cout << cnt << endl;
         }
     }
-    cout << pos << endl;
-    depth = vi(n, -1);
-    dfs(g, depth, pos, 0);
-    vi cnt(*max_element(all(depth))+1, 0);
-    rep(i, depth.size()) {
-        cnt[depth[i]]++;
-    }
-    ///*
-    rep(i, cnt.size()) {
-        cout << cnt[i] << " ";
-    }cout << endl;
-    //*/
-    int sum = 0, st = 0;
-    while (cnt.size() - st > k + 1) {
-        if (cnt[st+1] != 1) break;
-        st++; sum++;
-    }
-    cout << st << " " << sum << endl;
-    for (int i = cnt.size()-1; i - st > k+1; i--) {
-        sum += cnt[i];
-        cout << sum << endl;
-    }
-
-    cout << sum << endl;
+    cout << ans << endl;
 
     return 0;
 }
