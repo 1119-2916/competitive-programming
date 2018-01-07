@@ -33,56 +33,26 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
-template< class T >
-struct BinaryIndexedTree
-{
-    vector< T > data;
-
-    BinaryIndexedTree(int sz)
-    {
-        data.assign(++sz, 0);
-    }
-
-    T sum(int k)
-    {
-        T ret = 0;
-        for(++k; k > 0; k -= k & -k) ret += data[k];
-        return (ret);
-    }
-
-    void add(int k, T x)
-    {
-        for(++k; k < data.size(); k += k & -k) data[k] += x;
-    }
-};
-
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    int2(n, m);
-    vector<vp> data(m+1);
-    rep(i, n) {
-        int2(a, b);
-        data[b-a+1].pb({a, b});
+    int2(n, y);
+    rep(i, n+1) {
+        for (int j = 0; i + j < n+1; j++) {
+            int tmp = n - i - j;
+            if (i * 10000 + j * 5000 + tmp * 1000 == y) {
+                cout << i << " " << j << " " << tmp << endl;
+                return 0;
+            }
+        }
     }
+    cout << -1 << " " << -1 << " " << -1 << endl;
 
-    BinaryIndexedTree<int> bit(m+2);
-    int sum = n;
-    Rep(i, m+1) {
-        rep(j, data[i].size()) {
-            bit.add(data[i][j].fir, 1);
-            bit.add(data[i][j].sec+1, -1);
-        }
-        sum -= data[i].size();
-        int ret = sum;
-        for (int j = i; j <= m; j += i) {
-            ret += bit.sum(j);
-        }
-        std::cout << ret << std::endl;
-    }
 
     return 0;
 }
+
+
 
