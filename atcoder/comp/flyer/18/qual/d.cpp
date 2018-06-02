@@ -38,13 +38,37 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string a, b;
-    cin >> a >> b;
-    if (a == "H") {
-        cout << b << endl;
-    } else {
-        cout << (b == "H" ? "D" : "H") << endl;
+    int2(h, w);
+    int2(n, m);
+    vector<string> ban(n);
+    rep(i, n) {
+        cin >> ban[i];
+        rep(t, m) ban[i] += '.';
     }
+    string br(0);
+    rep(i, m) br += '.';
+    rep(i, n) ban.pb(br);
+
+    int yui = (h - n)+1, kyoko = (w - m)+1;
+
+
+    int ret = 0;
+    rep(i, n) {
+        rep(j, m) {
+            if (ban[i][j] == '#') {
+                int cnt = 0, ysyu = kyoko;
+                for (int k = i; k - i < yui; k++) {
+                    for (int l = j; l - j < ysyu; l++) {
+                        if (ban[k][l] == '.') cnt++;
+                        else break;
+                    }
+                }
+                ret += cnt;
+            }
+        }
+    }
+
+    cout << ret << endl;
 
     return 0;
 }

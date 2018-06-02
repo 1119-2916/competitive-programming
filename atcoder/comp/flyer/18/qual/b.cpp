@@ -38,13 +38,23 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string a, b;
-    cin >> a >> b;
-    if (a == "H") {
-        cout << b << endl;
-    } else {
-        cout << (b == "H" ? "D" : "H") << endl;
+    int3(a, b, n);
+    string st;
+    cin >> st;
+    rep(i, st.size()) {
+        if (st[i] == 'S' && a) {
+            a--;
+        } else if (st[i] == 'C' && b) {
+            b--;
+        } else if (st[i] == 'E' && (a || b)) {
+            if (a < b) b--;
+            else a--;
+        }
     }
+
+    cout << a << endl;
+    cout << b << endl;
+
 
     return 0;
 }
