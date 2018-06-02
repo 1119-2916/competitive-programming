@@ -43,16 +43,49 @@ signed main()
     memset(dp, 0, sizeof(dp));
 
     int2(n, x);
-    vector<int> data(n);
-    for (int i = 0; i < n; i++) {
+    vector<int> data(n+1, 0);
+    for (int i = 1; i <= n; i++) {
         cin >> data[i];
     }
 
+    vi yui(n+1, -1);
+    yui[0] = 1;
+    Rep(i, n+1) {
+        int tmp = 0;
+        for (int j = i+1; j <= n; j++) {
+            if (data[j] - data[i] >= x) {
+                yui[i] = j;
+                break;
+            }
+        }
+    }
 
-    
+    //rep(i, yui.size()) cout << yui[i] << " "; cout << endl;
+
+    for (int i = 0; i < n; i++) {
+        int ret = 0;
+        for (int j = 0; j < n; j++) {
+            if (yui[j] != -1) {
+                dp[i+1][yui[j]] = max(dp[i+1][yui[j]], dp[i][j] + x);
+                ret = max(ret, dp[i+1][yui[j]]);
+                dp[i+1][yui[j]-1] = max(dp[i+1][yui[j]-1], 
+                        dp[i][j] + data[yui[j]-1] - data[j]);
+                ret = max(ret, dp[i+1][yui[j]-1]);
+            } else {
+                dp[i+1][n] = max(dp[i+1][n], 
+                        dp[i][j] + data[n] - data[j]);
+                ret = max(ret, dp[i+1][n]);
+            }
+        }
+        //cout << dp[i+1][n] << endl;
+        cout << ret << endl;
+    }
+
+    rep(i, n+1) {
+        rep(j, n+1) {
+            //cout << dp[i][j] << " ";
+        } //cout << endl;
+    }
 
     return 0;
 }
-
-
-
