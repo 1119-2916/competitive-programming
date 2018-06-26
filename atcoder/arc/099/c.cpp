@@ -33,39 +33,46 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // BIT avl cusum dijkstra dinic geo2 gin graph kruskal lca lcm matrix ncm next_combination segtree st tmp topcoder uf vi 
 
-struct UnionFind {
-    vector<int> parent;
-    int size;
-    UnionFind(int n) :parent(n, -1), size(n) {}
-    bool unite(int x, int y) {
-        x = root(x); y = root(y);
-        if (x == y)return false;
-        if (sizeOf(x) < sizeOf(y))swap(x, y);
-        parent[x] += parent[y]; parent[y] = x; size--;
-        return true;
-    }
-    bool same(int x, int y) { return root(x) == root(y); }
-    int root(int x) { return parent[x] < 0 ? x : parent[x] = root(parent[x]); }
-    int sizeOf(int x) { return -parent[root(x)]; }
+using Weight = int;
+using Flow = int;
+struct Edge {
+    int s, d; Weight w; Flow c;
+    Edge() {};
+    Edge(int s, int d, Weight w = 1) : s(s), d(d), w(w), c(w) {};
 };
+bool operator<(const Edge &e1, const Edge &e2) { return e1.w < e2.w; }
+bool operator>(const Edge &e1, const Edge &e2) { return e2 < e1; }
+inline ostream &operator<<(ostream &os, const Edge &e) { return (os << '(' << e.s << ", " << e.d << ", " << e.w << ')'); }
 
-i_i solve(UnionFind &uf, vi &table, vb &used, int pos)
+using Edges = vector<Edge>;
+using Graph = vector<Edges>;
+using Array = vector<Weight>;
+using Matrix = vector<Array>;
+
+void addArc(Graph &g, int s, int d, Weight w = 1) {
+    g[s].emplace_back(s, d, w);
+}
+void addEdge(Graph &g, int a, int b, Weight w = 1) {
+    addArc(g, a, b, w);
+    addArc(g, b, a, w);
+}
+
+int cnt[3];
+bool failed;
+
+void dfs(Graph &yui, vi &table, int pos)
 {
-    i_i ret; ret.fir = 0; ret.sec = 0, cnt = 0;
-    if (table[pos] == -1) ret.fir++;
-    else ret.sec++;
-    rep(i, table.size()) {
-        if (i == pos) continue;
-        if (!used[i] && uf.same(pos, i+table.size())) {
-            table[i] = -table[pos];
-            used[i] = true;
-            solve(uf, table, used, i);
+    for (auto e : yui[pos]) {
+        if (!table[e.d]) {
+            table[e.d] = -table[pos];
+            cnt[table[e.d] + 1]++;
+            dfs(yui, table, e.d);
+        } else if (table[e.d] == table[pos]) {
+            failed = true;
+            break;
         }
     }
-    if (table[pos] == -1) ret.fir++;
-    else ret.sec++;
-
-
+}
 
 signed main()
 {
@@ -73,85 +80,57 @@ signed main()
     std::cin.tie(0);
 
     int2(n, m);
-    vvb graph(n, vb(n, false));
+    vvb kyoko(n, vb(n, false));
+    failed = false;
 
     rep(i, m) {
         int2(s, t);
         s--; t--;
-        graph[s][t] = graph[t][s] = true;
+        kyoko[s][t] = kyoko[t][s] = true;
     }
-    
-    UnionFind uf(n * 2);
-    rep(i, n) {
-        for (int j = i + 1; j < n; j++) {
-            if (!graph[i][j]) {
-                uf.unite(i, j + n);
-                uf.unite(i + n, j);
-            } else {
-                uf.unite(i, j);
-                uf.unite(i+n, j+n);
-            }
-        }
-    } 
 
+    Graph yui(n);
+    rep(i, n) for (int j = i + 1; j < n; j++) if (!kyoko[i][j]) addEdge(yui, i, j);
+
+    vi table(n, 0);
+    vector<i_i> funami;
     rep(i, n) {
-        rep(j, n) {
-            if (i == j) continue;
-            if (uf.same(i, j) == uf.same(i, j+n)) {
+        if (!table[i]) {
+            cnt[2] = 1; cnt[0] = 0; table[i] = 1;
+            dfs(yui, table, i);
+            if (failed) {
                 cout << -1 << endl;
                 return 0;
             }
+            funami.pb({cnt[0], cnt[2]});
         }
     }
 
-    vi table(n, 0);
-    vb used(n, false);
-    rep(i, n) {
-        solve(uf, table, i);
-        vi cnt;
-        rep(j, n) {
-            if (i == j) continue;
-            if (uf.same(i, j+n)) {
-                cnt.pb(j);
-            }
+//    cout << endl;
+//    for (auto i : funami) cout << i.fir << " " << i.sec << endl;
+//    cout << endl;
+
+    vb dp(n+1, false);
+    dp[0] = true;
+    for (auto i : funami) {
+        vb _dp(n+1, false);
+        rep(j, n+1) if (dp[j]) {
+            if (j + i.fir <= n) _dp[i.fir + j] = true;
+            if (j + i.sec <= n) _dp[i.sec + j] = true;
         }
-        if (cnt.size()) {
-            int pos = 0;
-            rep(j, cnt.size()) {
-                if (!pos && table[cnt[j]]) pos = table[cnt[j]];
-                else if (pos != table[cnt[j]]) {
-                    cout << -1 << endl;
-                    return 0;
-                }
-            }
-            if (pos) table[i] = -pos;
-            else {
-                pos = 1;
-                table[i] = -pos;
-            }
-            rep(j, cnt.size()) {
-                table[cnt[j]] = pos;
-            }
+        dp = _dp;
+    }
+
+    int ret = 0;
+    for (int i = n / 2; i >= 0; i++) {
+        if (dp[i]) {
+            ret = i;
+            break;
         }
     }
 
-    int cnt = 0, yui = 0, kyoko = 0;
-    rep(i, n) {
-        if (!table[i]) cnt++;
-        else if (table[i] == 1) yui++;
-        else kyoko++;
-    }
-
-    while (cnt) {
-        if (yui < kyoko) yui++;
-        else kyoko++;
-        cnt--;
-    }
-
-    cout << (yui * (yui - 1) / 2) + (kyoko * (kyoko - 1) / 2) << endl;
+    cout << (ret * (ret - 1) / 2) + ((n-ret) * ((n-ret) - 1) / 2) << endl;
 
     return 0;
 }
-
-
 
