@@ -35,6 +35,28 @@ using namespace std;
 // matrix dinic next_combination topcoder lcm
 // stack size = 128 * 1024 * 1024
 
+template< class T >
+struct BinaryIndexedTree
+{
+    vector< T > data;
+
+    BinaryIndexedTree(int sz)
+    {
+        data.assign(++sz, 0);
+    }
+
+    T sum(int k)
+    {
+        T ret = 0;
+        for(++k; k > 0; k -= k & -k) ret += data[k];
+        return (ret);
+    }
+
+    void add(int k, T x)
+    {
+        for(++k; k < data.size(); k += k & -k) data[k] += x;
+    }
+};
 
 class MajoritySubarray
 { 
@@ -47,15 +69,20 @@ class MajoritySubarray
                 data[i] = (seed / (ll)pow(2, 16)) % (ll)m;
                 seed = (seed * 1103515245LL + 12345LL) % (ll)pow(2, 31);
             }
-            vi cnt(2, 0);
-            rep(i, n) cnt[data[i]]++;
-            //cout << cnt[0] << " " << cnt[1] << endl;
-            return max(cnt[0], cnt[1]);
-            //rep(i, n) cout << data[i] << " "; cout << endl;
-            //ll ret = n;
-            return 0;
-        }
 
+            ll ret = 0;
+            rep(num, m) {
+                BinaryIndexedTree<ll> bit(n * 2 + 1);
+                int state = n;
+                rep(i, n) {
+                    bit.add(state, 1LL);
+                    if (data[i] == num) state++;
+                    else state--;
+                    ret += bit.sum(state-1);
+                }
+            }
+            return ret;
+        }
 };
 
 
@@ -63,16 +90,8 @@ class MajoritySubarray
 int main()
 {
     MajoritySubarray solve;
-    Int(n);
-    int ans = 0, anst = 0;
-    rep(i, n) {
-        int tmp = solve.getCount(2000, i, 2);
-        if (tmp > ans) {
-            ans = tmp;
-            anst = i;
-        }
-    }
-    cout << ans << " " << anst << endl;
+    int3(a, b, c);
+    cout << solve.getCount(a, b, c) << endl;
 
     return 0;
 }
