@@ -33,46 +33,24 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
-int dp[11][2][11]; // keta lim ichi
-
-void solve(string data)
-{
-    rep(i, data.length()) rep(j, 2) rep(k, 11) {
-        int lim = j ? 9 : data[i] - '0';
-        rep(l, lim+1) {
-            dp[i+1][j | l < lim][k + (l == 1)] += dp[i][j][k];
-        }
-    }
-}
+int dp[21][2][2][4];  // keta fl done num 
+string data;
 
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string data;
     cin >> data;
-    
-    dp[0][0][0] = 1;
-    solve(data);
-    //cout << st.length() << endl;
-   /* 
-    cout << 
-        dp[0][0][1] << " " << 
-        dp[0][1][1] << " " <<
-        dp[1][0][1] << " " << 
-        dp[1][1][1] << " " <<
-        dp[2][0][1] << " " << 
-        dp[2][1][1] << " " <<
-        endl;
-*/
-//    cout << dp[st.length()][0][1] << " " << dp[st.length()][1][1] << endl;
+    memset (dp, 0, sizeof(dp));
+    dp[0][0][0][0] = 1;
 
-    int ans = 0;
-    rep(i, 2) rep(j, 11) {
-        ans += dp[data.length()][i][j] * j;
-    }
-    cout << ans << endl;
+    for (int i = 0; i < n.length(); i++) {
+        rep(j, 10) {
+            if (j == data[i] - '0') {
+
+        
+
 
     return 0;
 }

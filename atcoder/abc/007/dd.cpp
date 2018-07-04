@@ -33,14 +33,15 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
-int dp[11][2][11]; // keta lim ichi
+int dp[20][2][2][2]; // keta fl 4 9
 
 void solve(string data)
 {
-    rep(i, data.length()) rep(j, 2) rep(k, 11) {
+    rep(i, data.size()) rep(j, 2) rep(k, 2) rep(l, 2) {
         int lim = j ? 9 : data[i] - '0';
-        rep(l, lim+1) {
-            dp[i+1][j | l < lim][k + (l == 1)] += dp[i][j][k];
+        rep(m, lim+1) {
+            dp[i+1][j || m < lim][k || m == 4][l || m == 9] +=
+                dp[i][j][k][l];
         }
     }
 }
@@ -50,29 +51,23 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string data;
-    cin >> data;
-    
-    dp[0][0][0] = 1;
-    solve(data);
-    //cout << st.length() << endl;
-   /* 
-    cout << 
-        dp[0][0][1] << " " << 
-        dp[0][1][1] << " " <<
-        dp[1][0][1] << " " << 
-        dp[1][1][1] << " " <<
-        dp[2][0][1] << " " << 
-        dp[2][1][1] << " " <<
-        endl;
-*/
-//    cout << dp[st.length()][0][1] << " " << dp[st.length()][1][1] << endl;
+    int2(a, b);
+    a--;
+    string aa = to_string(a), bb = to_string(b);
 
-    int ans = 0;
-    rep(i, 2) rep(j, 11) {
-        ans += dp[data.length()][i][j] * j;
-    }
-    cout << ans << endl;
+    memset(dp, 0, sizeof(dp));
+    dp[0][0][0][0] = 1;
+    solve(aa);
+    int ans_a = dp[aa.length()][0][1][0] + dp[aa.length()][0][0][1] +
+                dp[aa.length()][0][1][1] + dp[aa.length()][1][1][0] + 
+                dp[aa.length()][1][0][1] + dp[aa.length()][1][1][1];
+    memset(dp, 0, sizeof(dp));
+    dp[0][0][0][0] = 1;
+    solve(bb);
+    int ans_b = dp[bb.length()][0][1][0] + dp[bb.length()][0][0][1] +
+                dp[bb.length()][0][1][1] + dp[bb.length()][1][1][0] + 
+                dp[bb.length()][1][0][1] + dp[bb.length()][1][1][1];
+    cout << ans_b - ans_a << endl;
 
     return 0;
 }
