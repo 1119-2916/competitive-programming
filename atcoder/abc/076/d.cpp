@@ -10,7 +10,7 @@ using namespace std;
 #define Rep(i, N) for (int i = 1; i < N; i++)
 #define For(i, a, b) for (int i = (a); i < (b); i++)
 #define pb push_back
-#define eb emplece_back
+#define eb emplace_back
 #define mp make_pair
 #define i_i pair<int, int>
 #define vi vector<int>
@@ -28,43 +28,55 @@ using namespace std;
 #define fsec first.second
 #define sfir second.first
 #define ssec second.second
+#define Decimal fixed << setprecision(10)
 
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
+
+double dp[20002][102];
+int yui[20002][102];
+int n;
 
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    Int(n);
+    cin >> n;
     vector<int> time(n);
     for (int i = 0; i < n; i++) {
-        cin >> time[i];
+        Int(tmp);
+        if (i) time[i] = time[i-1] + tmp;
+        else time[i] = tmp;
     }
     vector<int> fast(n);
     for (int i = 0; i < n; i++) {
         cin >> fast[i];
     }
-    fast.pb(0);
 
-    double bef = 0.0;
-    double ans = 0.0;
-    rep(i, n) {
-        if (fast[i] > fast[i+1]) {
-            if ((fast[i] - bef)+(fast[i] - fast[i+1]) <= (double)time[i]) {
-                ans += (fast[i] - bef)*(fast[i] - bef)/2.0;
-                ans += (fast[i] - fast[i+1])*(fast[i] - fast[i+1])/2.0;
-                ans += ((double)time[i] -
-                    (fast[i] - bef)+(fast[i] - fast[i+1])) *fast[i];
-                ans += bef * (fast[i] - bef);
-                ans += (fast[i] - fast[i+1]) * fast[i+1];
-            } else {
+    yui[0][0] = 1;
 
+    int ptr = 0;
+    rep(i, time.back()) {
+        if (i == time[ptr]) ptr++;
+        rep(j, fast[ptr]+1) {
+            if (yui[i][j]) {
+                if (j < fast[ptr]) {
+                    dp[i+1][j+1] = max(dp[i+1][j+1], dp[i][j] + 0.5 + (double)j);
+                    dp[i+1][j] = max(dp[i+1][j], dp[i][j] + 0.25 + (double)j);
+                    yui[i+1][j+1] = 1;
+                }
+                dp[i+1][j] = max(dp[i+1][j], dp[i][j] + (double)j);
+                yui[i+1][j] = 1;
+                if (j >= 1) {
+                    dp[i+1][j-1] = max(dp[i+1][j-1], dp[i][j] + ((double)j - 0.5));
+                    yui[i+1][j-1] = 1;
+                }
+            }
+        }
+    }
 
-
-    
-    
+    cout << Decimal << dp[time.back()][0] << endl;
 
     return 0;
 }

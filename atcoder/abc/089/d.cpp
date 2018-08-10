@@ -12,12 +12,12 @@ using namespace std;
 #define pb push_back
 #define eb emplace_back
 #define mp make_pair
-#define i_i pair<int, int>
+#define pii pair<int, int>
 #define vi vector<int>
 #define vvi vector<vi >
 #define vb vector<bool>
 #define vvb vector<vb >
-#define vp vector< i_i >
+#define vp vector< pii >
 #define all(a) (a).begin(), (a).end()
 #define Int(x) int x; cin >> x;
 #define int2(x, y) Int(x); Int(y);
@@ -28,6 +28,7 @@ using namespace std;
 #define fsec first.second
 #define sfir second.first
 #define ssec second.second
+#define Decimal fixed << setprecision(10)
 
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
@@ -38,19 +39,33 @@ signed main()
     std::cin.tie(0);
 
     int2(h, w);
-    vvi dp(10, vi(10, 0));
-    rep(i, 10) rep(j, 10) cin >> dp[i][j];
+    Int(d);
+    map<int, pii> funami;
 
-    rep(k, 10) rep(i, 10) rep(j, 10) {
-        dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
-    }
-
-    int ans = 0;
     rep(i, h) rep(j, w) {
         Int(tmp);
-        if (tmp != -1) ans += dp[tmp][1];
+        funami[tmp] = {i, j};
     }
-    cout << ans << endl;
+
+    vector<int> yui(h * w + 1, -1);
+
+    Rep(i, yui.size()) {
+        if (yui[i] == -1) {
+            yui[i] = 0;
+            int nxt = i + d, now = i;
+            while (nxt < h * w + 1) {
+                yui[nxt] = yui[now] + abs(funami[now].fir-funami[nxt].fir) + 
+                    abs(funami[now].sec-funami[nxt].sec);
+                now += d; nxt += d;
+            }
+        }
+    }
+
+    Int(q);
+    while (q--) {
+        int2(a, b);
+        cout << yui[b] - yui[a] << endl;
+    }
 
     return 0;
 }
