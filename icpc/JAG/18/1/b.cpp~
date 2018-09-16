@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+  int T;
+  cin>>T;
+  for(int case=0;case<T;case++){
+    vector<int> c(6);
+    for(int i=0;i<6;i++)cin>>c[i];
+    vector<int> a(14);
+    for(int i=0;i<6;i++)a[c[i]]++;
+    vector<int> num(5);
+    for(int i=0;i<13;i++)num[a[i+1]]++;
+    for(int i=1;i<5;i++)cout<<num[i]<<" ";
+    cout<<endl;
+  }
+}
