@@ -1,0 +1,49 @@
+#include<iostream>
+#include<vector>
+#include<map>
+#include<set>
+#include<algorithm>
+#include<string>
+
+using namespace std;
+
+#define ll long long
+#define REP(i,n) for(ll (i) = 0;i < n;i++)
+#define MP make_pair
+#define PB push_back
+#define ALL(v) v.begin(),v.end()
+#define FI first
+#define SE second
+
+bool mp[1111][1111];//n,1 sente kati ga true
+bool used[1111][1111];
+
+int main(void) {
+  
+  used[0][0] = true;
+  mp[0][1] = 0;
+  used[0][1] = true;
+  mp[1][0] = true;
+  used[1][0] = true;
+
+  REP(i,1111){
+    REP(j,1111){
+      if(used[i][j])continue;
+      bool seica = false;
+      if(i > 0 && !(i == 1 && j == 0))seica |= !mp[i-1][j];
+      if(j > 0 && !(i == 0 && j == 1)))seica |= !mp[i][j-1];
+      if(i > 0 && j < 1111)seica |= !mp[i-1][j+1];
+      mp[i][j] = seica;
+    }
+  }
+
+  REP(i,25){
+    REP(j,25){
+      cout << mp[i][j] << " " ;
+    }
+    cout << endl;
+  }
+  
+  
+  return 0;
+}

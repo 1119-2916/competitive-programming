@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define rep(i, n) for (int i = 0; i < n; i++)
+#define int long long 
+#define INF 1001000100010001000
+#define fir first
+#define sec second
+#define all(a) (a).begin(), (a).end()
+
+
+signed main()
+{
+    int n; cin >> n;
+    int cnt = 0;
+    int seica = 0;
+    int olphe = 0;
+    rep(i, n) {
+        int a; cin >> a;
+	olphe ^= a;
+        if (a == 1) cnt++;
+	else seica++;
+    }
+
+    cout << seica << " " << cnt << endl;
+    
+    if(seica == 0){
+      if(cnt % 2 == 0){
+	cout << "Alice" << endl;
+      }
+      else {
+	cout << "Bob" << endl;
+      }
+    } else {
+      if(cnt % 2 == 0 && seica % 2 == 0){
+	cout << "Bob" << endl;
+      }
+      else if(olphe == 1 && seica %2 == 0){
+	cout << "Bob" << endl;
+      }
+      else {
+	cout << "Alice" << endl;
+      }
+    }
+    return 0;
+}

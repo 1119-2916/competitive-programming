@@ -1,0 +1,47 @@
+#include<iostream>
+#include<vector>
+#include<map>
+#include<set>
+#include<algorithm>
+#include<string>
+
+using namespace std;
+
+#define ll long long
+#define REP(i,n) for(ll (i) = 0;i < n;i++)
+#define MP make_pair
+#define PB push_back
+#define ALL(v) v.begin(),v.end()
+#define FI first
+#define SE second
+
+int main(void) {
+  ll s;cin >> s;
+  ll ans = 0;
+
+  for(ll i = 1;i <= s;i++){
+    for(ll j = 1;j <= s;j++){
+      //      cout << "(" << i << "," << j << ") " << (i+1)*(j+1)*i*j/4 << endl;
+      if((i+1)*(j*1)*i*j/4 > s)break;
+      ll now = (i+1)*(j+1)*i*j / 4;
+      for(ll k = 0;k <= s;k++){
+	//cout << "     " << now;
+	if(now > s){
+	  //cout << endl;
+	  break;
+	}
+	if((s - now) % (i*j*(2*k+j+1)/2) == 0){
+	  //cout << "!";
+	  ans++;
+	}
+	now += i*j*(i+1)/2;
+	//cout << endl;
+      }
+    }
+  }
+
+  cout << ans << endl;
+  
+  return 0;
+}
+
