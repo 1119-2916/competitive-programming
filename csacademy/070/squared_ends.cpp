@@ -34,13 +34,19 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
-
-template <typename T, const T id>
+/**
+ * 動的 CHT 単調性無しok 各操作 O(logN)
+ * **必ず厳密な探索範囲[minn, maxx]を与えること**
+ * T = int 以外で未検証
+ */
+template <typename T, const T id = numeric_limits<T>::min()>
 class CHT {
+    using L = T;   // 返り値の型 (縦軸)
+    const T accuracy = 0;  // 精度 (横軸)
     struct Line {
         T a, b;
         Line (T a = 0, T b = 0) : a(a), b(b) {}
-        T get (T x) { return a * x + b; }
+        L get (T x) { return a * x + b; }
     };
     struct Node {
         Line line;
@@ -49,51 +55,48 @@ class CHT {
     };
 
 private :
-    const int n;
-    const vector<T> pos;
+    // 探索区間（横軸）の最小、最大
+    const T minn, maxx; 
     Node *root;
 
-public :
-    CHT (const vector<T>& pos) : n(pos.size()), pos(pos), root(nullptr) {}
-    void insert(T a, T b) {
-        Line line(a, b);
-        root = modify(root, 0, n, line);
-    }
-    T query(T x) {
-        int t = lower_bound(pos.begin(), pos.end(), x) - pos.begin();
-        assert(t < n && pos[t] == x);
-        return sub(root, 0, n, t);
-    }
-
-private :
-    Node* modify(Node *p, int lb, int ub, Line& line) {
+    // [lb, ub]
+    Node* update(Node *p, T lb, T ub, Line& line) {
         if (!p) return new Node(line);
-        if (p->line.get(pos[lb]) >= line.get(pos[lb]) && 
-                p->line.get(pos[ub-1]) >= line.get(pos[ub-1])) return p;
-        if (p->line.get(pos[lb]) <= line.get(pos[lb]) && 
-                p->line.get(pos[ub-1]) <= line.get(pos[ub-1])) {
+        if (p->line.get(lb) >= line.get(lb) && 
+                p->line.get(ub) >= line.get(ub)) return p;
+        if (p->line.get(lb) <= line.get(lb) && 
+                p->line.get(ub) <= line.get(ub)) {
             p->line = line;
             return p;
         }
-        int mid = (lb + ub) / 2;
-        if (p->line.get(pos[mid]) < line.get(pos[mid])) swap(p->line, line);
-        if (p->line.get(pos[lb]) <= line.get(pos[lb]))
-            p->lch = modify(p->lch, lb, mid, line);
+        T mid = (lb + ub) / 2;
+        if (p->line.get(mid) < line.get(mid)) swap(p->line, line);
+        if (p->line.get(lb) <= line.get(lb))
+            p->lch = update(p->lch, lb, mid, line);
         else 
-            p->rch = modify(p->rch, mid, ub, line);
+            p->rch = update(p->rch, mid, ub, line);
         return p;
     }
-    T sub(Node *p, int lb, int ub, int t) {
-        if (!p) {
-            return id;
+    L query(Node *p, T lb, T ub, T t) {
+        if (!p) { return id; }
+        if (ub - lb <= accuracy) return p->line.get(t);
+        T mid = (lb + ub) / 2;
+        if (t <= mid) {
+            return max(p->line.get(t), query(p->lch, lb, mid, t));
         }
-        if (ub - lb == 1) return p->line.get(pos[t]);
-        int mid = (lb + ub) / 2;
-        if (t < mid) {
-            return max(p->line.get(pos[t]), sub(p->lch, lb, mid, t));
-        }
-        return max(p->line.get(pos[t]), sub(p->rch, mid, ub, t));
+        return max(p->line.get(t), query(p->rch, mid, ub, t));
     }
+
+public :
+    CHT (const T minn, const T maxx) : minn(minn), maxx(maxx), root(nullptr) {}
+    void insert(T a, T b) {
+        Line line(a, b);
+        root = update(root, minn, maxx, line);
+    }
+    L get(T x) {
+        return query(root, minn, maxx, x);
+    }
+
 };
 
 
@@ -103,21 +106,20 @@ signed main()
     std::cin.tie(0);
 
     int2(n, k);
+    int tmp = 0;
     vector<int> data(n);
     for (int i = 0; i < n; i++) {
         cin >> data[i];
+        tmp = max(tmp, data[i]);
     }
     
-    vi arr = data;
-    sort(all(arr)); arr.erase(unique(all(arr)), arr.end());
-
     vvi dp(k+1, vi(n+1, INF));
     dp[0][0] = 0;
     rep(i, k) {
-        CHT<int, -INF> funami(arr);
+        CHT<int> funami(1, tmp);
         rep(a, n) {
             funami.insert(2 * data[a], -(dp[i][a] + data[a] * data[a]));
-            dp[i+1][a+1] = data[a] * data[a] - funami.query(data[a]);
+            dp[i+1][a+1] = data[a] * data[a] - funami.get(data[a]);
         }
     }
     cout << dp[k][n] << endl;
