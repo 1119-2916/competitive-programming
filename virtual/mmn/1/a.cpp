@@ -39,24 +39,13 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    int2(n, m);
+    int2(a, b);
+    Int(tmp);
 
-    vector<int> data(m);
-    for (int i = 0; i < m; i++) {
-        cin >> data[i];
-    }
-    reverse(all(data));
-    
-    vi mmn(n, 0);
-    rep(i, data.size()) {
-        if (!mmn[data[i]-1]) {
-            cout << data[i] << endl;
-            mmn[data[i]-1] = 1;
-        }
-    }
-
-    rep(i, mmn.size()) {
-        if (!mmn[i]) cout << i+1 << endl;
+    if (tmp <= b) {
+        cout << a + tmp << endl;
+    } else {
+        cout << b + a - (tmp - b) << endl;
     }
 
     return 0;
