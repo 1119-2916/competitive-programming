@@ -34,47 +34,42 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
-bool check(string st)
-{
-    Rep(i, st.size()) {
-        if (st[0] != st[i]) return false;
-    }
-    return true;
-}
-
-int solve(string st, char p)
-{
-    string nxt = st;
-    int ret = 0;
-    while (!check(nxt)) {
-        string tmp;
-        rep(i, nxt.size()-1) {
-            if (nxt[i] == p || nxt[i+1] == p) {
-                tmp.pb(p);
-            } else {
-                tmp.pb(nxt[i]);
-            }
-        }
-        nxt = tmp;
-        ret++;
-    }
-    return ret;
-}
-
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string st;
-    cin >> st;
-    
-    int ans = INF;
-    for (char i = 'a'; i <= 'z'; i++) {
-        ans = min(ans, solve(st, i));
+    Int(n);
+    vector<int> data(n);
+    for (int i = 0; i < n; i++) {
+        cin >> data[i];
     }
 
-    std::cout << ans << std::endl;
+    vi funami(n), used(n, 1);
+    rep(i, n) {
+        int cnt = 0, p = -1;
+        rep(j, n) {
+            cnt += used[j];
+            if (cnt == data[j] && used[j]) {
+                p = j;
+            }
+        }
+        if (p != -1) {
+            funami[i] = data[p];
+            used[p] = 0;
+        } else {
+            std::cout << -1 << std::endl;
+            return 0;
+        }
+    }
+
+    reverse(all(funami));
+    rep(i, n) {
+        std::cout << funami[i] << std::endl;
+    }
 
     return 0;
 }
+
+
+

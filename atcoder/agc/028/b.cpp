@@ -32,95 +32,7 @@ using namespace std;
 #define Decimal fixed << setprecision(10)
 
 //int dxy[5] = {0, 1, 0, -1, 0};
-// 01Trie BIT CHT DFT FFT avl cmd cusum dijkstra dinic geo2 gin graph kruskal lca lcm matrix ncm next_combination ppuf segtree st tmp topcoder uf vi 
-
-int fact[1145140];
-int pascal_table[100][100];
-
-/*
- * tableをdoubleにしてncmの割合も求められる
- * 1/2して下ってゆくように書き換えてその場で作る.
- */
-void make_pascal(int mod)
-{
-    rep(i, 100) {
-        pascal_table[i][0] = 1;
-        for (int j = 1; j < i; j++) {
-            pascal_table[i][j] = (pascal_table[i-1][j-1] +
-                    pascal_table[i-1][j]) % mod;
-        }
-        pascal_table[i][i] = 1;
-    }
-}
-
-int gcd(int a, int b) { if (b == 0) return a; return gcd(b, a%b); }
-
-int extgcd(int a, int b, int &x, int &y)
-{
-    int d = a;
-    if (b != 0) {
-        d = extgcd(b, a % b, y, x);
-        y -= (a / b) * x;
-    } else { x = 1; y = 0; }
-    return d;
-}
-
-int repow(int x, int n, int mod)
-{
-    if (n == 0) return 1;
-    int res = repow(x * x % mod, n / 2, mod);
-    if (n & 1) res = res * x % mod;
-    return res;
-}
-
-int mod_inverse(int a, int m)
-{
-    int x, y;
-    extgcd(a, m, x, y);
-    return ( m + x % m ) % m;
-}
-
-int table(int n)
-{
-    int sum = 1;
-    fact[0] = 1;
-    Rep(i, n+2) {
-        sum *= i;
-        sum %= MOD;
-        fact[i] = sum;
-    }
-}
-
-int mod_fact(int n, int p, int &e)
-{
-    e = 0;
-    if (n == 0) return 1;
-    int res = mod_fact(n / p, p, e);
-    e += n / p;
-
-    if (n / p % 2 != 0) return res * (p - fact[n % p]) % p;
-    return res * fact[n % p] % p;
-}
-
-/*
- * nCr mod p
- * nHr = (n+r-1)Cr
- * 必ずtable()を呼んでから使う.
- * n = 1001000くらいで
- */
-int mod_comb(int n, int k, int p) {
-    if (n < 0 || k < 0 || n < k) return 0;
-    int e1, e2, e3;
-    int a1 = mod_fact(n, p, e1), a2 = mod_fact(k, p, e2), a3 = mod_fact(n-k, p, e3);
-    if (e1 > e2 + e3) return 0;
-    return a1 * mod_inverse(a2 * a3 % p, p) % p;
-}
-
-int ncm(int n, int r)
-{
-    if (r == 0) return 1;
-    return (n-r+1) * ncm(n, r-1) / r;
-}
+// cmd
 
 signed main()
 {
@@ -128,22 +40,58 @@ signed main()
     std::cin.tie(0);
 
     Int(n);
-    vector<int> data(n);
-    for (int i = 0; i < n; i++) {
-        cin >> data[i];
-    }
-    
-    int yui = n * (n+1) / 2 - n - n + 1;
-    int ans = 0;
-    for (int i = 2; i <= n; i++) {
-        int tmp = (repow(2, yui, MOD)+1) * (i - 1) % MOD;
-        cout << tmp << " ";
-        cout << yui << endl;
-        ans += (tmp * data[i-2]) % MOD;
-        yui -= (n - i);
-    }
+    vi perm(n);
+    rep(i, n) perm[i] = i;
 
-    cout << (ans + data.back()) % MOD << endl;
+    vi ans(n, 0);
+    vector<map<int, int>> funami(n);
+
+    do {
+        cout << "# : " << endl;
+        rep(i, n) {
+            std::cout << perm[i] << " ";
+        }
+        cout << endl;
+
+        vi used(n, 1);
+        vi cnt(n, 0);
+        rep(i, perm.size()) {
+            int p = perm[i];
+            cnt[p]++;
+            used[p] = 0;
+            for (int j = p+1; j < n; j++) {
+                if (!used[j]) break;
+                cnt[j]++;
+            }
+            for (int j = p-1; j >= 0; j--) {
+                if (!used[j]) break;
+                cnt[j]++;
+            }
+        }
+
+        rep(i, n) {
+            std::cout << cnt[i] << " ";
+            funami[i][cnt[i]]++;
+            ans[i] += cnt[i];
+        }cout << endl;
+
+    } while (next_permutation(all(perm)));
+
+    cout << endl;
+    std::cout << "sum : " << std::endl;
+    rep(i, n) {
+        for (auto j : funami[i]) {
+            std::cout << j.second << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+    
+    cout << "ans : " << endl;
+    rep(i, ans.size()) {
+        std::cout << ans[i] << " ";
+    }
+    cout << endl;
 
     return 0;
 }

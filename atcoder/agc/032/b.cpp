@@ -34,47 +34,30 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
-bool check(string st)
-{
-    Rep(i, st.size()) {
-        if (st[0] != st[i]) return false;
-    }
-    return true;
-}
-
-int solve(string st, char p)
-{
-    string nxt = st;
-    int ret = 0;
-    while (!check(nxt)) {
-        string tmp;
-        rep(i, nxt.size()-1) {
-            if (nxt[i] == p || nxt[i+1] == p) {
-                tmp.pb(p);
-            } else {
-                tmp.pb(nxt[i]);
-            }
-        }
-        nxt = tmp;
-        ret++;
-    }
-    return ret;
-}
-
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    string st;
-    cin >> st;
-    
-    int ans = INF;
-    for (char i = 'a'; i <= 'z'; i++) {
-        ans = min(ans, solve(st, i));
-    }
+    Int(n);
 
-    std::cout << ans << std::endl;
+    if (n % 2 == 0) {
+        std::cout << n * (n-1) / 2 - (n/2) << std::endl;
+        rep(i, n) {
+            for (int j = i+1; j < n; j++) {
+                if (i + j + 2 == n + 1) continue;
+                std::cout << i+1 << " " << j+1 << std::endl;
+            }
+        }
+    } else {
+        std::cout << n * (n-1) / 2 - (n/2) << std::endl;
+        rep(i, n) {
+            for (int j = i+1; j < n; j++) {
+                if (i + j + 2 == n) continue;
+                std::cout << i+1 << " " << j+1 << std::endl;
+            }
+        }
+    }
 
     return 0;
 }

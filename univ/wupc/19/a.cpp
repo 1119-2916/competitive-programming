@@ -34,33 +34,6 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
-bool check(string st)
-{
-    Rep(i, st.size()) {
-        if (st[0] != st[i]) return false;
-    }
-    return true;
-}
-
-int solve(string st, char p)
-{
-    string nxt = st;
-    int ret = 0;
-    while (!check(nxt)) {
-        string tmp;
-        rep(i, nxt.size()-1) {
-            if (nxt[i] == p || nxt[i+1] == p) {
-                tmp.pb(p);
-            } else {
-                tmp.pb(nxt[i]);
-            }
-        }
-        nxt = tmp;
-        ret++;
-    }
-    return ret;
-}
-
 signed main()
 {
     std::ios::sync_with_stdio(false);
@@ -69,12 +42,19 @@ signed main()
     string st;
     cin >> st;
     
-    int ans = INF;
-    for (char i = 'a'; i <= 'z'; i++) {
-        ans = min(ans, solve(st, i));
+    string ret;
+    for (int i = st.size()-1; i > 0; i--) {
+        if (st[i] == 'A' && st[i-1] == 'W') {
+            ret.pb('C');
+            st[i-1] = 'A';
+        } else {
+            ret.pb(st[i]);
+        }
     }
+    ret.pb(st[0]);
 
-    std::cout << ans << std::endl;
+    reverse(all(ret));
+    cout << ret << endl;
 
     return 0;
 }
