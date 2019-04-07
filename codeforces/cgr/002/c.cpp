@@ -34,63 +34,56 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
-int n;
-int a[50], b[50];
-
-bool solve(int mask, int targ)
-{
-    vvi dp(n+1, vi(51, 0));
-    rep(i, n) {
-        dp[i][a[i]] = 1;
-    }
-
-    for (int i = 50; i > 0; i--) {
-        if ((1ll << i) & mask || i <= targ) {
-            rep(j, n) {
-                rep(k, 51) {
-                    if (dp[j][k]) dp[j][k % i] = 1;
-                }
-            }
-        }
-    }
-
-    rep(i, n) {
-        if (!dp[i][b[i]]) return false;
-    }
-    return true;
-}
-
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    cin >> n;
+    int2(n, m);
+    vvi a(n, vi(m)), b(n, vi(m));
     rep(i, n) {
-        cin >> a[i];
+        rep(j, m) {
+            cin >> a[i][j];
+        }
     }
     rep(i, n) {
-        cin >> b[i];
-    }
-
-    if (!solve(0, 50)) {
-        std::cout << -1 << std::endl;
-        return 0;
-    }
-
-    int mmn = 0;
-    for (int i = 50; i > 0; i--) {
-        if (!solve(mmn, i-1)) {
-            mmn |= 1ll << i;
+        rep(j, m) {
+            cin >> b[i][j];
         }
     }
 
-    int ans = 0;
-    rep(i, 50) {
-        ans += mmn & (1ll << i);
+    vi tate(n, 0), yoko(m, 0);
+    rep(i, n) {
+        int sum = 0;
+        rep(j, m) {
+            if (a[i][j] != b[i][j]) sum++;
+        }
+        tate[i] = sum;
     }
 
-    std::cout << ans << std::endl;
+    rep(j, m) {
+        int sum = 0;
+        rep(i, n) {
+            if (a[i][j] != b[i][j]) sum++;
+        }
+        yoko[j] = sum;
+    }
+
+    rep(i, tate.size()) {
+        if (tate[i] % 2) {
+            cout << "No" << endl;
+            return 0;
+        }
+    }
+
+    rep(i, yoko.size()) {
+        if (yoko[i] % 2) {
+            std::cout << "No" << std::endl;
+            return 0;
+        }
+    }
+
+    std::cout << "Yes" << std::endl;
 
     return 0;
 }

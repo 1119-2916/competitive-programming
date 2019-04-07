@@ -34,61 +34,27 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
-int n;
-int a[50], b[50];
-
-bool solve(int mask, int targ)
-{
-    vvi dp(n+1, vi(51, 0));
-    rep(i, n) {
-        dp[i][a[i]] = 1;
-    }
-
-    for (int i = 50; i > 0; i--) {
-        if ((1ll << i) & mask || i <= targ) {
-            rep(j, n) {
-                rep(k, 51) {
-                    if (dp[j][k]) dp[j][k % i] = 1;
-                }
-            }
-        }
-    }
-
-    rep(i, n) {
-        if (!dp[i][b[i]]) return false;
-    }
-    return true;
-}
-
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    cin >> n;
-    rep(i, n) {
-        cin >> a[i];
-    }
-    rep(i, n) {
-        cin >> b[i];
+    vector<int> data(5);
+    for (int i = 0; i < 5; i++) {
+        cin >> data[i];
     }
 
-    if (!solve(0, 50)) {
-        std::cout << -1 << std::endl;
-        return 0;
-    }
+    int ans = INF;
+    sort(all(data));
 
-    int mmn = 0;
-    for (int i = 50; i > 0; i--) {
-        if (!solve(mmn, i-1)) {
-            mmn |= 1ll << i;
+    do {
+        int t = 0;
+        rep(i, data.size()-1) {
+            t += data[i];
+            while (t % 10) t++;
         }
-    }
-
-    int ans = 0;
-    rep(i, 50) {
-        ans += mmn & (1ll << i);
-    }
+        ans = min(ans, t + data.back());
+    } while (next_permutation(all(data)));
 
     std::cout << ans << std::endl;
 

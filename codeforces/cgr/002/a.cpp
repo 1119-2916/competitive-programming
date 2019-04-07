@@ -34,63 +34,34 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
-int n;
-int a[50], b[50];
-
-bool solve(int mask, int targ)
-{
-    vvi dp(n+1, vi(51, 0));
-    rep(i, n) {
-        dp[i][a[i]] = 1;
-    }
-
-    for (int i = 50; i > 0; i--) {
-        if ((1ll << i) & mask || i <= targ) {
-            rep(j, n) {
-                rep(k, 51) {
-                    if (dp[j][k]) dp[j][k % i] = 1;
-                }
-            }
-        }
-    }
-
-    rep(i, n) {
-        if (!dp[i][b[i]]) return false;
-    }
-    return true;
-}
-
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    cin >> n;
+    Int(n);
+    vector<int> data(n);
+    for (int i = 0; i < n; i++) {
+        cin >> data[i];
+    }
+    
+    int ans = 0;
     rep(i, n) {
-        cin >> a[i];
-    }
-    rep(i, n) {
-        cin >> b[i];
-    }
-
-    if (!solve(0, 50)) {
-        std::cout << -1 << std::endl;
-        return 0;
-    }
-
-    int mmn = 0;
-    for (int i = 50; i > 0; i--) {
-        if (!solve(mmn, i-1)) {
-            mmn |= 1ll << i;
+        if (data.back() != data[i]) {
+            ans = n - i - 1;
+            break;
         }
     }
 
-    int ans = 0;
-    rep(i, 50) {
-        ans += mmn & (1ll << i);
+    for (int i = n-1; i > 0; i--) {
+        if (data[0] != data[i]) {
+            ans = max(ans, i);
+            break;
+        }
     }
 
     std::cout << ans << std::endl;
+
 
     return 0;
 }

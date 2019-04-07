@@ -34,30 +34,18 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
-int n;
-int a[50], b[50];
-
-bool solve(int mask, int targ)
+bool solve(int h, vi &input, int k)
 {
-    vvi dp(n+1, vi(51, 0));
-    rep(i, n) {
-        dp[i][a[i]] = 1;
+    vi data(k);
+    rep(i, k) data[i] = input[i];
+    sort(all(data));
+    int s = 0;
+    for (int i = k-1; i >= 0; i -= 2) {
+        s += data[i];
     }
-
-    for (int i = 50; i > 0; i--) {
-        if ((1ll << i) & mask || i <= targ) {
-            rep(j, n) {
-                rep(k, 51) {
-                    if (dp[j][k]) dp[j][k % i] = 1;
-                }
-            }
-        }
-    }
-
-    rep(i, n) {
-        if (!dp[i][b[i]]) return false;
-    }
-    return true;
+    //std::cout << k << " : " << s << std::endl;
+    if (s > h) return false;
+    else return true;
 }
 
 signed main()
@@ -65,32 +53,28 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    cin >> n;
-    rep(i, n) {
-        cin >> a[i];
+    int2(n, h);
+    vector<int> data(n);
+    for (int i = 0; i < n; i++) {
+        cin >> data[i];
     }
-    rep(i, n) {
-        cin >> b[i];
-    }
-
-    if (!solve(0, 50)) {
-        std::cout << -1 << std::endl;
+    
+    if (solve(h, data, data.size())) {
+        std::cout << n << std::endl;
         return 0;
     }
 
-    int mmn = 0;
-    for (int i = 50; i > 0; i--) {
-        if (!solve(mmn, i-1)) {
-            mmn |= 1ll << i;
+    int l = 1, r = n;
+    while (r - l > 1) {
+        int mid = (l + r) / 2;
+        if (solve(h, data, mid)) {
+            l = mid;
+        } else {
+            r = mid;
         }
     }
 
-    int ans = 0;
-    rep(i, 50) {
-        ans += mmn & (1ll << i);
-    }
-
-    std::cout << ans << std::endl;
+    std::cout << l << std::endl;
 
     return 0;
 }

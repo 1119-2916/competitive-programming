@@ -34,30 +34,13 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
-int n;
-int a[50], b[50];
-
-bool solve(int mask, int targ)
+void solve(int n, string &st)
 {
-    vvi dp(n+1, vi(51, 0));
-    rep(i, n) {
-        dp[i][a[i]] = 1;
+    rep(i, st.size()) {
+        if (st[i] == 'S') cout << "E";
+        else cout << "S";
     }
-
-    for (int i = 50; i > 0; i--) {
-        if ((1ll << i) & mask || i <= targ) {
-            rep(j, n) {
-                rep(k, 51) {
-                    if (dp[j][k]) dp[j][k % i] = 1;
-                }
-            }
-        }
-    }
-
-    rep(i, n) {
-        if (!dp[i][b[i]]) return false;
-    }
-    return true;
+    cout << endl;
 }
 
 signed main()
@@ -65,32 +48,14 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    cin >> n;
-    rep(i, n) {
-        cin >> a[i];
+    Int(Q);
+    rep(q, Q) {
+        std::cout << "Case #" << q+1 << ": ";
+        Int(n);
+        string st;
+        cin >> st;
+        solve(n, st);
     }
-    rep(i, n) {
-        cin >> b[i];
-    }
-
-    if (!solve(0, 50)) {
-        std::cout << -1 << std::endl;
-        return 0;
-    }
-
-    int mmn = 0;
-    for (int i = 50; i > 0; i--) {
-        if (!solve(mmn, i-1)) {
-            mmn |= 1ll << i;
-        }
-    }
-
-    int ans = 0;
-    rep(i, 50) {
-        ans += mmn & (1ll << i);
-    }
-
-    std::cout << ans << std::endl;
 
     return 0;
 }

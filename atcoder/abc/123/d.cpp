@@ -34,63 +34,48 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
-int n;
-int a[50], b[50];
-
-bool solve(int mask, int targ)
-{
-    vvi dp(n+1, vi(51, 0));
-    rep(i, n) {
-        dp[i][a[i]] = 1;
-    }
-
-    for (int i = 50; i > 0; i--) {
-        if ((1ll << i) & mask || i <= targ) {
-            rep(j, n) {
-                rep(k, 51) {
-                    if (dp[j][k]) dp[j][k % i] = 1;
-                }
-            }
-        }
-    }
-
-    rep(i, n) {
-        if (!dp[i][b[i]]) return false;
-    }
-    return true;
-}
-
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    cin >> n;
-    rep(i, n) {
+    int3(x, y, z);
+    Int(k);
+    vector<int> a(x);
+    for (int i = 0; i < x; i++) {
         cin >> a[i];
     }
-    rep(i, n) {
+    vector<int> b(y);
+    for (int i = 0; i < y; i++) {
         cin >> b[i];
     }
-
-    if (!solve(0, 50)) {
-        std::cout << -1 << std::endl;
-        return 0;
+    vector<int> c(z);
+    for (int i = 0; i < z; i++) {
+        cin >> c[i];
     }
-
-    int mmn = 0;
-    for (int i = 50; i > 0; i--) {
-        if (!solve(mmn, i-1)) {
-            mmn |= 1ll << i;
+    vector<int> ab(x * y);
+    rep(i, x) {
+        rep(j, y) {
+            ab[i * y + j] = a[i] + b[j];
         }
     }
 
-    int ans = 0;
-    rep(i, 50) {
-        ans += mmn & (1ll << i);
+    sort(all(ab));
+    reverse(all(ab));
+
+    vi ans(min(k, (int)ab.size()) * z);
+    rep(i, min(k, (int)ab.size())) {
+        rep(j, z) {
+            ans[i * z + j] = ab[i] + c[j];
+        }
     }
 
-    std::cout << ans << std::endl;
+    sort(all(ans));
+    reverse(all(ans));
+
+    rep(i, k) {
+        std::cout << ans[i] << std::endl;
+    }
 
     return 0;
 }
