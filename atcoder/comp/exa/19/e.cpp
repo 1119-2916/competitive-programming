@@ -127,15 +127,17 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    table(100001, MOD);
+    table(1000001, MOD);
     int2(b, w);
 
     int mm = 1;
     int B = 0, W = 0;
     rep(i, b+w) {
+        //W = (W + (mod_comb(i-1, b-1, MOD) * mod_inverse(2, MOD) % MOD) % MOD;
         //int B = mm * mod_comb(i, b, MOD) % MOD, W = mm * mod_comb(i, w, MOD) % MOD;
         //std::cout << B << " " << W << std::endl;
         //cout << (mod_inverse(2, MOD) - (B * mod_inverse(2, MOD) % MOD) + (W * mod_inverse(2, MOD) % MOD) + MOD) % MOD << endl;
+        //*
         cout << ((1 - B + W + MOD) % MOD) * mod_inverse(2, MOD) % MOD << endl;
         if (i == b - 1 + w) {
             B = (B + (mod_comb(i, b-1, MOD) * mm) % MOD) % MOD;
@@ -149,6 +151,7 @@ signed main()
         }
         //W = (W + (mod_comb(i, w-1, MOD) * mm) % MOD) % MOD;
         mm = mm * mod_inverse(2, MOD) % MOD;
+        //*/
     }
 
     return 0;
