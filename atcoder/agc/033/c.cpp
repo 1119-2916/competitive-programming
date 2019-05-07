@@ -87,28 +87,26 @@ signed main()
     }
 
     vi used(n, 0);
+    used[0] = 1;
+    dfs(g, 0, used);
 
     int p = 0;
     rep(i, n) {
-        if (g[p].size() < g[i].size()) {
-            p = i;
-        }
+        if (used[p] < used[i]) p = i;
     }
 
-    map<int, int> cnt;
-    vi used(n, 0);
+    used.assign(n, 0);
     used[p] = 1;
-    dfs(g, p, used, cnt);
-    used[p] = 0;
-    rep(i, used.size()) {
-        cnt[used[i]]++;
+    dfs(g, p, used);
+
+    int ans = 0;
+    rep(i, n) ans = max(ans, used[i]);
+
+    if (ans % 3 == 2) {
+        std::cout << "Second" << std::endl;
+    } else {
+        std::cout << "First" << std::endl;
     }
-
-    bool fl = false;
-    for (auto i : cnt) {
-        fl = i.fir % 2;
-
-
 
     return 0;
 }
