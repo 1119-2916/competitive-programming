@@ -43,7 +43,7 @@ signed main()
     cin >> xyz[0] >> xyz[1] >> xyz[2];
     int n = xyz[0] + xyz[1] + xyz[2], yui = 0;
 
-    vector<tuple<int, int, int, int, int>> data(n);
+    vector<pair<pair<int, pii>, pii>> data(n);
     int ans = 0;
     {
         vp tmp(3);
@@ -53,15 +53,6 @@ signed main()
             tmp[0].sec = 0; tmp[1].sec = 1; tmp[2].sec = 2;
             sort(all(tmp));
             ans += tmp[0].fir;
-            int t1 = tmp[2].fir - tmp[1].fir, 
-                t2 = tmp[0].fir - tmp[1].fir,
-                t3 = tmp[0].fir - tmp[2].fir,
-                t4 = tmp[2].sec,
-                t5 = tmp[1].sec;
-            data[i] = tie(t1, t2, t3, t4, t5);
-            std::cout << t1 << " " << t2 << " " << t3 << " "
-                << t4 << " " << t5<< std::endl;
-            /*
             data[i].fsec.sec = -(tmp[0].fir - tmp[2].fir);
             data[i].fsec.fir = -(tmp[0].fir - tmp[1].fir);
             data[i].ffir = tmp[2].fir - tmp[1].fir;
@@ -72,62 +63,29 @@ signed main()
                 data[i].fsec.sec << " " <<
                 data[i].sfir << " " <<
                 data[i].ssec << std::endl;
-                */
         }
     }
     
     std::cout << "ans : " << ans << std::endl;
 
-    cout << "================" << endl;
-    rep(i, n) {
-        int t1, t2, t3, t4, t5;
-        tie(t1, t2, t3, t4, t5) = data[i];
-        std::cout << t1 << " " << t2 << " " << t3 << " "
-            << t4 << " " << t5<< std::endl;
-    }
     sort(all(data));
-    cout << "================" << endl;
-    rep(i, n) {
-        int t1, t2, t3, t4, t5;
-        tie(t1, t2, t3, t4, t5) = data[i];
-        std::cout << t1 << " " << t2 << " " << t3 << " "
-            << t4 << " " << t5<< std::endl;
-    }
     reverse(all(data));
-    cout << "================" << endl;
-    rep(i, n) {
-        int t1, t2, t3, t4, t5;
-        tie(t1, t2, t3, t4, t5) = data[i];
-        std::cout << t1 << " " << t2 << " " << t3 << " "
-            << t4 << " " << t5<< std::endl;
-    }
-    cout << "================" << endl;
 
-    rep(i, n) {
-        int t1, t2, t3, t4, t5;
-        tie(t1, t2, t3, t4, t5) = data[i];
-        std::cout << t1 << " " << t2 << " " << t3 << " "
-            << t4 << " " << t5<< std::endl;
-        if (xyz[t4]) {
-            xyz[t4]--;
-            ans -= t3;
-        } else if (xyz[t5]) {
-            xyz[t5]--;
-            ans -= t2;
-        }
-        std::cout << "ans : " << ans << std::endl;
-    }
-
-
-    /*
     rep(i, data.size()) {
             std::cout << data[i].ffir << " " <<
                 data[i].fsec.fir << " " <<
                 data[i].fsec.sec << " " <<
                 data[i].sfir << " " <<
                 data[i].ssec << std::endl;
+        if (xyz[data[i].sfir]) {
+            xyz[data[i].sfir]--;
+            ans += data[i].fsec.sec;
+        } else if (xyz[data[i].ssec]) {
+            xyz[data[i].ssec]--;
+            ans += data[i].fsec.fir;
+        }
+        std::cout << "ans : " << ans << std::endl;
     }
-    */
 
     std::cout << ans << std::endl;
 

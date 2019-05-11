@@ -34,6 +34,30 @@ using namespace std;
  
 signed main()
 {
+    Int(n);
+    vector<int> data(n);
+    for (int i = 0; i < n; i++) {
+        cin >> data[i];
+    }
+    
+    sort(all(data));
+
+    if (data.back() - data[0] > 1) {
+        std::cout << "No" << std::endl;
+        return 0;
+    }
+
+    int sm = 0;
+    rep(i, n) {
+        if (data.back() != data[i]) sm++;
+    }
+
+    if ((data.back() - sm) == n-1 ||
+            (data.back() - sm) <= (n - sm) / 2 && 0 < (data.back() - sm)) {
+        std::cout << "Yes" << std::endl;
+    } else {
+        std::cout << "No" << std::endl;
+    }
 
     return 0;
 }
