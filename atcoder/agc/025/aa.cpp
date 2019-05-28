@@ -30,12 +30,19 @@ using namespace std;
 #define sfir second.first
 #define ssec second.second
 #define Decimal fixed << setprecision(10)
-#define vd vector<double>
-#define vvd vector< vd >
-
 
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
+
+int ds(int p)
+{
+    int ret = 0;
+    while (p) {
+        ret += p % 10;
+        p /= 10;
+    }
+    return ret;
+}
 
 signed main()
 {
@@ -43,20 +50,12 @@ signed main()
     std::cin.tie(0);
 
     Int(n);
-
-    vector<vvd> dp(n+1, vvd(n+1, vd(n+1, 0)));
-    vi cnt(3, 0);
-
-    rep(i, n) {
-        Int(tmp);
-        cnt[tmp-1]++;
+    
+    int ans = INF;
+    Rep(i, n) {
+        ans = min(ans, ds(i) + ds(n-i));
     }
-
-
-
-
+    std::cout << ans << std::endl;
 
     return 0;
 }
-
-

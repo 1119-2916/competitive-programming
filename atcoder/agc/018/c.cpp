@@ -39,97 +39,68 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    vi xyz(3);
-    cin >> xyz[0] >> xyz[1] >> xyz[2];
-    int n = xyz[0] + xyz[1] + xyz[2], yui = 0;
+    vi yui(3);
+    rep(i, 3) cin >> yui[i];
+    int n = 0;
+    rep(i, 3) n += yui[i];
 
-    vector<tuple<int, int, int, int, int>> data(n);
-    int ans = 0;
-    {
-        vp tmp(3);
-        rep(i, n) {
-            int3(a, b, c);
-            tmp[0].fir = a; tmp[1].fir = b; tmp[2].fir = c;
-            tmp[0].sec = 0; tmp[1].sec = 1; tmp[2].sec = 2;
-            sort(all(tmp));
-            ans += tmp[0].fir;
-            int t1 = tmp[2].fir - tmp[1].fir, 
-                t2 = tmp[0].fir - tmp[1].fir,
-                t3 = tmp[0].fir - tmp[2].fir,
-                t4 = tmp[2].sec,
-                t5 = tmp[1].sec;
-            data[i] = tie(t1, t2, t3, t4, t5);
-            std::cout << t1 << " " << t2 << " " << t3 << " "
-                << t4 << " " << t5<< std::endl;
-            /*
-            data[i].fsec.sec = -(tmp[0].fir - tmp[2].fir);
-            data[i].fsec.fir = -(tmp[0].fir - tmp[1].fir);
-            data[i].ffir = tmp[2].fir - tmp[1].fir;
-            data[i].sfir = tmp[2].sec;
-            data[i].ssec = tmp[1].sec;
-            std::cout << data[i].ffir << " " <<
-                data[i].fsec.fir << " " <<
-                data[i].fsec.sec << " " <<
-                data[i].sfir << " " <<
-                data[i].ssec << std::endl;
-                */
+    vvi data(n, vi(3));
+    rep(i, n) {
+        rep(j, 3) {
+            cin >> data[i][j];
         }
     }
-    
-    std::cout << "ans : " << ans << std::endl;
 
-    cout << "================" << endl;
-    rep(i, n) {
-        int t1, t2, t3, t4, t5;
-        tie(t1, t2, t3, t4, t5) = data[i];
-        std::cout << t1 << " " << t2 << " " << t3 << " "
-            << t4 << " " << t5<< std::endl;
-    }
-    sort(all(data));
-    cout << "================" << endl;
-    rep(i, n) {
-        int t1, t2, t3, t4, t5;
-        tie(t1, t2, t3, t4, t5) = data[i];
-        std::cout << t1 << " " << t2 << " " << t3 << " "
-            << t4 << " " << t5<< std::endl;
-    }
-    reverse(all(data));
-    cout << "================" << endl;
-    rep(i, n) {
-        int t1, t2, t3, t4, t5;
-        tie(t1, t2, t3, t4, t5) = data[i];
-        std::cout << t1 << " " << t2 << " " << t3 << " "
-            << t4 << " " << t5<< std::endl;
-    }
-    cout << "================" << endl;
-
-    rep(i, n) {
-        int t1, t2, t3, t4, t5;
-        tie(t1, t2, t3, t4, t5) = data[i];
-        std::cout << t1 << " " << t2 << " " << t3 << " "
-            << t4 << " " << t5<< std::endl;
-        if (xyz[t4]) {
-            xyz[t4]--;
-            ans -= t3;
-        } else if (xyz[t5]) {
-            xyz[t5]--;
-            ans -= t2;
-        }
-        std::cout << "ans : " << ans << std::endl;
-    }
-
+    sort(all(data), [&](vi &x, vi &y){return x[1] - x[0] < y[1] - y[0];});
 
     /*
-    rep(i, data.size()) {
-            std::cout << data[i].ffir << " " <<
-                data[i].fsec.fir << " " <<
-                data[i].fsec.sec << " " <<
-                data[i].sfir << " " <<
-                data[i].ssec << std::endl;
+    rep(i, n) {
+        rep(j, data[i].size()) {
+            cout << data[i][j] << " ";
+        }
+        cout << " : " << data[i][1] - data[i][0] << endl;
     }
     */
 
-    std::cout << ans << std::endl;
+    vi ans(n+1, -INF);
+    {
+        priority_queue<int> pq;
+        ans[yui[0]] = 0;
+        rep(i, yui[0]) {
+            pq.push(data[i][2] - data[i][0]);
+            ans[yui[0]] += data[i][0];
+
+        }
+        for (int i = yui[0]+1; i < n-yui[1]+1; i++) {
+            ans[i] = ans[i-1];
+            ans[i] += data[i-1][0];
+            pq.push(data[i-1][2] - data[i-1][0]);
+            ans[i] += pq.top();
+            pq.pop();
+        }
+    }
+/*
+    rep(i, n) 
+        std::cout << ans[i] << " ";
+    std::cout << std::endl;
+*/
+    reverse(all(data));
+
+    int ret = -INF, tmp = 0;
+    priority_queue<int> pq;
+    rep(i, yui[1]) {
+        pq.push(data[i][2] - data[i][1]);
+        tmp += data[i][1];
+    }
+    ret = max(ret, tmp + ans[n-yui[1]]);
+    for (int i = yui[1]+1; i < n-yui[0]+1; i++) {
+        tmp += data[i-1][1];
+        pq.push(data[i-1][2] - data[i-1][1]);
+        tmp += pq.top();
+        pq.pop();
+        ret = max(ret, tmp + ans[n-i]);
+    }
+    std::cout << ret << std::endl;
 
     return 0;
 }

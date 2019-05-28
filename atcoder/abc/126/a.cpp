@@ -39,35 +39,19 @@ signed main()
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    Int(n);
-    vector<int> data(n);
-    for (int i = 0; i < n; i++) {
-        cin >> data[i];
-    }
-    Rep(i, n) data[i] ^= data[i-1];
-
-    vi dp0(1 << 20, 1), dp1(1 << 20, 0), zeros(1 << 20, 0);
-    // 始点に 0 があると考えるので全ての x について初期0数1個
-    int zero = 0; 
+    int2(n, k);
+    string st;
+    cin >> st;
+    
     rep(i, n) {
-        if (!data[i]) {
-            zero++;
+        if (i == k-1) {
+            cout << (char)(st[i] + ('a' - 'A'));
         } else {
-            dp0[data[i]] = (dp0[data[i]] + dp1[data[i]] * (zero - zeros[data[i]])) % MOD; // 0 の累積を求める
-            dp1[data[i]] = (dp1[data[i]] + dp0[data[i]]) % MOD; // i 番目の解が求められ、区間の値 k = data[i] の時の解の累積が増える
-            zeros[data[i]] = zero;
-            //std::cout << dp0[data[i]] << " , " << dp1[data[i]] << std::endl;
+            std::cout << st[i];
         }
     }
 
-    if (data.back()) {
-        std::cout << dp0[data.back()] << std::endl;
-    } else {
-        int ans = 1;
-        rep(i, zero-1) ans = (ans * 2) % MOD;
-        rep(i, dp1.size()) ans += dp1[i];
-        std::cout << ans % MOD << std::endl;
-    }
+    cout << endl;
 
     return 0;
 }

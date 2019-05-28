@@ -34,40 +34,38 @@ using namespace std;
 //int dxy[5] = {0, 1, 0, -1, 0};
 // cmd
 
+bool mm(char a, char b)
+{
+    if (a == '0' && in(b, '1', '9'+1)) {
+        return true;
+    } else if (a == '1' && (b == '0' || b == '1' || b == '2')) {
+        return true;
+    }
+    return false;
+}
+
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    Int(n);
-    vector<int> data(n);
-    for (int i = 0; i < n; i++) {
-        cin >> data[i];
-    }
-    Rep(i, n) data[i] ^= data[i-1];
+    string st;
+    cin >> st;
 
-    vi dp0(1 << 20, 1), dp1(1 << 20, 0), zeros(1 << 20, 0);
-    // 始点に 0 があると考えるので全ての x について初期0数1個
-    int zero = 0; 
-    rep(i, n) {
-        if (!data[i]) {
-            zero++;
+    if (mm(st[0], st[1])) {
+        if (mm(st[2], st[3])) {
+            std::cout << "AMBIGUOUS" << std::endl;
         } else {
-            dp0[data[i]] = (dp0[data[i]] + dp1[data[i]] * (zero - zeros[data[i]])) % MOD; // 0 の累積を求める
-            dp1[data[i]] = (dp1[data[i]] + dp0[data[i]]) % MOD; // i 番目の解が求められ、区間の値 k = data[i] の時の解の累積が増える
-            zeros[data[i]] = zero;
-            //std::cout << dp0[data[i]] << " , " << dp1[data[i]] << std::endl;
+            std::cout << "MMYY" << std::endl;
+        }
+    } else {
+        if (mm(st[2], st[3])) {
+            std::cout << "YYMM" << std::endl;
+        } else {
+            std::cout << "NA" << std::endl;
         }
     }
-
-    if (data.back()) {
-        std::cout << dp0[data.back()] << std::endl;
-    } else {
-        int ans = 1;
-        rep(i, zero-1) ans = (ans * 2) % MOD;
-        rep(i, dp1.size()) ans += dp1[i];
-        std::cout << ans % MOD << std::endl;
-    }
+    
 
     return 0;
 }

@@ -53,8 +53,8 @@ signed main()
         if (!data[i]) {
             zero++;
         } else {
-            dp0[data[i]] = (dp0[data[i]] + dp1[data[i]] * (zero - zeros[data[i]])) % MOD; // 0 の累積を求める
-            dp1[data[i]] = (dp1[data[i]] + dp0[data[i]]) % MOD; // i 番目の解が求められ、区間の値 k = data[i] の時の解の累積が増える
+            (dp0[data[i]] += dp1[data[i]] * (zero - zeros[data[i]])) %= MOD; // 0 の累積を求める
+            (dp1[data[i]] += dp0[data[i]]) %= MOD; // i 番目の解が求められ、区間の値 k = data[i] の時の解の累積が増える
             zeros[data[i]] = zero;
             //std::cout << dp0[data[i]] << " , " << dp1[data[i]] << std::endl;
         }
@@ -65,8 +65,8 @@ signed main()
     } else {
         int ans = 1;
         rep(i, zero-1) ans = (ans * 2) % MOD;
-        rep(i, dp1.size()) ans += dp1[i];
-        std::cout << ans % MOD << std::endl;
+        rep(i, dp1.size()) (ans += dp1[i]) % MOD;
+        std::cout << ans << std::endl;
     }
 
     return 0;
