@@ -5,7 +5,7 @@
 
 # accounts
 * AtCoder       : [Ti11192916](https://atcoder.jp/user/Ti11192916)
-* ToprCoder     : [1119\_2916](https://www.topcoder.com/members/1119_2916/)
+* TopCoder     : [1119\_2916](https://www.topcoder.com/members/1119_2916/)
 * Codeforces    : [ti11192916](http://codeforces.com/profile/ti11192916)
 * CS Academy    : [Ti11192916](https://csacademy.com/user/Ti11192916)
 * CodeChef      : [ti11192916](https://www.codechef.com/users/ti11192916)
