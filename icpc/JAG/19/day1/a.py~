@@ -1,0 +1,17 @@
+l,s=input().split()
+l=int(l)
+m=0
+for i in range(l):
+    if s[i]!='.':continue
+    if 0<i<l:
+        if s[i-1]==s[i+1]=='B':continue
+    j=i
+    while j-1>=0 and s[j-1]=='B':
+        j-=1
+    t=i-j if s[j]=='.' else 0
+    j=i
+    while j+1<l and s[j+1]=='B':
+        j+=1
+    t+=i+j if s[j]=='.' else 0
+    m=max(m,t)
+print(m)
