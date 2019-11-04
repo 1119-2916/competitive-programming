@@ -32,7 +32,7 @@ using namespace std;
 #define Decimal fixed << setprecision(10)
 
 //int dxy[5] = {0, 1, 0, -1, 0};
-// cmd
+// 01Trie BIT CHT DFT FFT avl cmd cusum dijkstra dinic geo2 gin graph kruskal lca lcm matrix ncm next_combination ppuf segtree st tmp topcoder uf vi 
 
 using Weight = int;
 using Flow = int;
@@ -58,35 +58,74 @@ void addEdge(Graph &g, int a, int b, Weight w = 1) {
     addArc(g, b, a, w);
 }
 
-void solve(Graph &g, vi &ans, int p)
+bool mm(vvi &data, vi &dg, int p, int num)
 {
-    for (auto i : g[p]) {
-        if (!ans[i.d]) {
-            ans[i.d] = (i.w % 2 ? -ans[p] : ans[p]);
-            solve(g, ans, i.d);
+    dg[p] = num;
+    bool ret = true;
+    rep(i, data.size()) {
+        if (i != p && data[i][p]) {
+            if (!dg[i]) {
+                ret &= mm(data, dg, i, (num == 1LL ? 2LL : 1LL));
+            } else if (dg[i] == dg[p]) {
+                return false;
+            }
         }
     }
+    return ret;
 }
 
 signed main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
+    
 
     Int(n);
-    Graph g(n);
-    for (int i = 1; i < n; i++) {
-        int3(tmpx, tmpy, tmp);
-        tmpx--; tmpy--;
-        addEdge(g, tmpx, tmpy, tmp);
+    vvi data(n, vi(n, 0));
+    vi digraph(n, 0);
+
+    vector<string> shami(n);
+    rep(i, n) {
+        cin >> shami[i];
     }
 
-    vi ans(n, 0);
-    ans[0] = 1;
-    solve(g, ans, 0);
-    rep(i, ans.size()) {
-        std::cout << (ans[i] == -1 ? 0 : 1) << std::endl;
+    rep(i, n) {
+        rep(j, n) {
+            data[i][j] = shami[i][j] - '0';
+        }
     }
+
+    bool ret = true;
+    rep(i, n) {
+        if (!digraph[i]) {
+            ret &= mm(data, digraph, i, 1LL);
+        }
+    }
+
+    if (!ret) {
+        std::cout << -1 << std::endl;
+        return 0;
+    }
+
+    rep(i, n) {
+        rep(j, n) {
+            if (i == j) continue;
+            if (data[i][j] == 0) data[i][j] = INF;
+        }
+    }
+    
+    rep(k, n) rep(i, n) rep(j, n)
+        data[i][j] = min(data[i][j], data[i][k] + data[k][j]);
+
+    int ans = 0;
+    rep(i, n) {
+        rep(j, n) {
+            if (data[i][j] != INF) ans = max(ans, data[i][j]);
+        }
+    }
+
+    std::cout << ans + 1 << std::endl;
+
 
     return 0;
 }
